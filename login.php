@@ -28,6 +28,8 @@ require_once('header.php');
     </div>
 </content>
 
-<div class="background"></div>
+<?php
+require_once 'footer.php';
+?>
 
 <script src="assets/js/login_check.js"></script>

@@ -89,16 +89,17 @@ require_once 'assets/php/connection.php';
             </div>
         </div>
     </div>
-</content>
-
-<div class="error-wrapper">
+    <div class="error-wrapper">
     <div class="error">
         <p></p>
         <a class="button enter" href="login.php">Войти</a>
     </div>
 </div>
+</content>
 
-<div class="background"></div>
+<?php
+require_once 'footer.php';
+?>
 
 <script src="assets/js/catalog_handler.js"></script>
 <script src="assets/js/add_to_cart.js"></script>

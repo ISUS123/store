@@ -146,6 +146,8 @@ if (empty($_SESSION["session_username"])) {
     </div>
 </content>  
 
-<div class="background"></div>
+<?php
+require_once 'footer.php';
+?>
 
 <script src="assets/js/cart_handler.js"></script>

@@ -9,7 +9,7 @@
     <!-- <link rel="stylesheet" href="assets/css/style.css"> -->
     <link rel="shortcut icon" href="../assets/img/favicon.png" sizes="512x512" type="image/x-icon">
 </head>
-    <div class="header">
+    <header>
         <div class="container">    
             <div class="menus">
                 <a href="about_company.php" class="menu-button button-about">О нас
@@ -35,4 +35,4 @@
             ?>
             
         </div>
-    </div>
+    </header>
