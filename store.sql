@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.1.1
+-- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
 -- Хост: 127.0.0.1:3306
--- Время создания: Июн 27 2022 г., 14:13
--- Версия сервера: 5.7.33
--- Версия PHP: 7.1.33
+-- Время создания: Окт 28 2022 г., 13:51
+-- Версия сервера: 5.7.39
+-- Версия PHP: 7.2.34
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -33,15 +33,6 @@ CREATE TABLE `cart` (
   `product_id` int(11) NOT NULL,
   `qnt` int(10) UNSIGNED NOT NULL DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Дамп данных таблицы `cart`
---
-
-INSERT INTO `cart` (`cart_id`, `customer_id`, `product_id`, `qnt`) VALUES
-(25, 34, 7, 1),
-(26, 34, 10, 1),
-(27, 34, 9, 1);
 
 -- --------------------------------------------------------
 
@@ -72,12 +63,12 @@ INSERT INTO `category` (`category_id`, `name`) VALUES
 
 CREATE TABLE `customer` (
   `customer_id` int(11) NOT NULL,
-  `name` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `surname` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `patronymic` text COLLATE utf8mb4_unicode_ci,
-  `login` varchar(25) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `email` varchar(25) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `password` text COLLATE utf8mb4_unicode_ci NOT NULL
+  `name` varchar(32) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `surname` varchar(32) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `patronymic` varchar(32) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `login` varchar(16) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `email` varchar(32) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `password` varchar(32) COLLATE utf8mb4_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
@@ -102,16 +93,6 @@ CREATE TABLE `order` (
   `date` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
---
--- Дамп данных таблицы `order`
---
-
-INSERT INTO `order` (`order_id`, `product_id`, `customer_id`, `cost`, `qnt`, `date`) VALUES
-(7, 6, 34, 34520, 1, '2022-06-27'),
-(8, 8, 34, 24000, 3, '2022-06-27'),
-(9, 9, 34, 7500, 1, '2022-06-27'),
-(10, 6, 34, 34520, 1, '2022-06-27');
-
 -- --------------------------------------------------------
 
 --
@@ -121,7 +102,7 @@ INSERT INTO `order` (`order_id`, `product_id`, `customer_id`, `cost`, `qnt`, `da
 CREATE TABLE `product` (
   `product_id` int(11) NOT NULL,
   `category_id` int(11) NOT NULL,
-  `name` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `name` varchar(128) COLLATE utf8mb4_unicode_ci NOT NULL,
   `description` varchar(256) COLLATE utf8mb4_unicode_ci DEFAULT 'Нет описания',
   `year` int(4) NOT NULL,
   `price` int(11) NOT NULL,
@@ -191,7 +172,7 @@ ALTER TABLE `product`
 -- AUTO_INCREMENT для таблицы `cart`
 --
 ALTER TABLE `cart`
-  MODIFY `cart_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
+  MODIFY `cart_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
 
 --
 -- AUTO_INCREMENT для таблицы `category`
@@ -209,7 +190,7 @@ ALTER TABLE `customer`
 -- AUTO_INCREMENT для таблицы `order`
 --
 ALTER TABLE `order`
-  MODIFY `order_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `order_id` int(10) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT для таблицы `product`
