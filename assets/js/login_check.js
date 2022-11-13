@@ -6,12 +6,12 @@ form.addEventListener("submit", function (evt) {
     evt.preventDefault();
 
     //Getting form data
-    var formData = {
+    let formData = {
         login: document.querySelector("input[name='login']").value,
         password: document.querySelector("input[name='password']").value
       };
     
-      var request = new XMLHttpRequest();
+      let request = new XMLHttpRequest();
     
       request.addEventListener("load", function () {
         //Errors handlers

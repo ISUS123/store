@@ -6,6 +6,7 @@
     <title>Copy Star</title>
     <link rel="stylesheet/less" type="text/css" href="assets/css/style.less" />
     <script src="assets/js/less@4.js"></script>
+    <!-- <script src="assets/js/jquery-3.6.1.min.js"></script> -->
     <!-- <link rel="stylesheet" href="assets/css/style.css"> -->
     <link rel="shortcut icon" href="../assets/img/favicon.png" sizes="512x512" type="image/x-icon">
 </head>

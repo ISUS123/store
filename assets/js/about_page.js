@@ -121,10 +121,13 @@ let checkElementAvailability = function (element) {
 
   let sliderLine = document.querySelector(".slider-line");
   let offset = 0;
+  let width = 1044;
+
+
 
   leftButton.addEventListener("click", function () {
-    offset += 844;
-    if (offset >= 844) {
+    offset += width;
+    if (offset >= width) {
       //if left border reached
       offset = 0; //set first item
       catalogItem[0].classList.add("shake-left");
@@ -141,10 +144,10 @@ let checkElementAvailability = function (element) {
   };
 
   rightButton.addEventListener("click", function () {
-    offset -= 844;
-    if (offset <= -4216) {
+    offset -= width;
+    if (offset <= -width*5) {
       //if right border reached
-      offset = -3376; //set previous item
+      offset = offset+width; //set previous item
       catalogItem[4].classList.add("shake-right");
       catalogItem[4].addEventListener("animationend", animationEndCallback);
     }

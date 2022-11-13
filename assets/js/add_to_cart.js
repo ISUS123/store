@@ -24,7 +24,7 @@ let showHint = function (button, responseCode) { //Shows hint that removes after
       hint.textContent = "Недостаточно товара в наличии";
       break;
   }
-  button.after(hint); //Adding hint to the button pressed
+  button.after(hint); //Adding hint to the button which is pressed
 
   let coord = button.getBoundingClientRect(); //Getting the coordinates of the pressed button
   hint.top = coord.top; //Align hint coords to button coords

@@ -1,100 +1,174 @@
-let item = document.querySelector(".catalog-item");
+let form = document.querySelector("form");
+let content = document.querySelector(".catalog-items");
 
-let checkElementAvailability = function (element) {
+let getItems = function () {
 
-  let menu = document.querySelector(".catalog-menu");
-  //If query fail hide menu and stop script
-  if (!element) {
-    menu.style.display = "none";
-    return;
-  }
+  let formData = {
+    sortType: form.querySelector("select[name='sort_type']").value,
+    sortOrder: form.querySelector("select[name='sort_order']").value,
+    itemCategory: form.querySelector("select[name='item_category']").value,
+  };
 
-  //Getting data from GET for sync script value and page value
-  function getAllUrlParams(url) {
-    // извлекаем строку из URL или объекта window
-    var queryString = url ? url.split("?")[1] : window.location.search.slice(1);
+  let request = new XMLHttpRequest();
 
-    // объект для хранения параметров
-    var obj = {};
+  request.addEventListener("load", function () {
+    if(request.responseText != "1") {
+      content.innerHTML = request.response;
+      addToCartUpdate();
+    } else {
 
-    // если есть строка запроса
-    if (queryString) {
-      // данные после знака # будут опущены
-      queryString = queryString.split("#")[0];
-
-      // разделяем параметры
-      var arr = queryString.split("&");
-
-      for (var i = 0; i < arr.length; i++) {
-        // разделяем параметр на ключ => значение
-        var a = arr[i].split("=");
-
-        // обработка данных вида: list[]=thing1&list[]=thing2
-        var paramNum = undefined;
-        var paramName = a[0].replace(/\[\d*\]/, function (v) {
-          paramNum = v.slice(1, -1);
-          return "";
-        });
-
-        // передача значения параметра ('true' если значение не задано)
-        var paramValue = typeof a[1] === "undefined" ? true : a[1];
-
-        // преобразование регистра
-        paramName = paramName.toLowerCase();
-        paramValue = paramValue.toLowerCase();
-
-        // если ключ параметра уже задан
-        if (obj[paramName]) {
-          // преобразуем текущее значение в массив
-          if (typeof obj[paramName] === "string") {
-            obj[paramName] = [obj[paramName]];
-          }
-          // если не задан индекс...
-          if (typeof paramNum === "undefined") {
-            // помещаем значение в конец массива
-            obj[paramName].push(paramValue);
-          }
-          // если индекс задан...
-          else {
-            // размещаем элемент по заданному индексу
-            obj[paramName][paramNum] = paramValue;
-          }
-        }
-        // если параметр не задан, делаем это вручную
-        else {
-          obj[paramName] = paramValue;
-        }
-      }
-    }
-
-    return obj;
-  }
-
-  let sortOrder = menu.querySelector("select[name='sort_order']");
-  let itemCategory = menu.querySelector("select[name='item_category']");
-  let sortType = menu.querySelector("select[name='sort_type']");
-
-  //Syncing form with GET values
-  window.onload = function () {
-    //Getting value from GET
-    let sortTypeGet = getAllUrlParams().sort_type;
-    let itemCategoryGet = getAllUrlParams().item_category;
-    let sortOrderGet = getAllUrlParams().sort_order;
-
-    //Syncing sortType with GET value
-    for (let i = 0; i < sortType.length; i++) {
-      if (sortType[i].value === sortTypeGet) sortType[i].selected = true;
-    }
-    //Syncing itemCategory with GET value
-    for (let i = 0; i < itemCategory.length; i++) {
-      if (itemCategory[i].value === itemCategoryGet) itemCategory[i].selected = true;
-    }
-    //Syncing arrow class with GET value
-    for (let i = 0; i < sortOrder.length; i++) {
-      if (sortOrder[i].value === sortOrderGet) sortOrder[i].selected = true; 
     }
     
-  };
+  });
+
+  request.open("POST", "assets/php/catalog_handler.php");
+  request.setRequestHeader(
+    "Content-Type",
+    "application/x-www-form-urlencoded; charset=UTF-8"
+  );
+  request.send(
+    "sort_type=" +
+      encodeURIComponent(formData.sortType) +
+      "&sort_order=" +
+      encodeURIComponent(formData.sortOrder) +
+      "&item_category=" +
+      encodeURIComponent(formData.itemCategory)
+  );
 };
 
-checkElementAvailability(item);
+form.addEventListener("submit", function (evt) {
+  evt.preventDefault();
+  getItems();
+});
+
+document.onload = getItems();
+
+let addToCartUpdate = function() {
+  let buttons = document.querySelectorAll(".to-cart");
+  let error = document.querySelector(".error-wrapper");
+  let errorWindow = error.querySelector(".error");
+  let errorMessage = errorWindow.querySelector(".error p");
+  let enterButton = errorWindow.querySelector(".enter");
+  let cart = document.querySelector(".button-cart");
+  
+  let showHint = function (button, responseCode) { //Shows hint that removes after 1sec
+    let hint = document.createElement("div"); //Making hint element
+    hint.classList.add("hint");
+    switch (
+      responseCode[0] //Changing hint text
+    ) {
+      case "3":
+        hint.textContent = "Товар добавлен в корзину";
+        break;
+      case "4":
+        hint.textContent =
+          "Кол-во данного товара в корзине обновлено: " +
+          responseCode[1] +
+          " шт.";
+        break;
+      case "5":
+        hint.textContent = "Недостаточно товара в наличии";
+        break;
+    }
+    button.after(hint); //Adding hint to the button which is pressed
+  
+    let coord = button.getBoundingClientRect(); //Getting the coordinates of the pressed button
+    hint.top = coord.top; //Align hint coords to button coords
+    hint.left = coord.left;
+    hint.style.animation = "hint 1s ease"; //Adding reveal and hide animation to hint
+    setTimeout(function () {
+      //Removing element on the end of animation
+      hint.remove();
+    }, 1000);
+  };
+  
+  let changeButtonText = function (button, responseCode) { //Changes add to cart button text
+    switch (responseCode[0]) {
+      case "3": {
+        button.textContent = "Товар добавлен в корзину";
+        break;
+      }
+      case "4": {
+        button.textContent =
+          "Кол-во данного товара в корзине обновлено: " +
+          responseCode[1] +
+          " шт.";
+        break;
+      }
+      case "5": {
+        button.textContent = "Недостаточно товара в наличии";
+        break;
+      }
+    }
+  };
+  
+  let showError = function (text) {
+    error.style.animation = "reveal 0.5s ease";
+    errorMessage.textContent = text;
+    error.style.display = "flex";
+  };
+  
+  let addButtonClickHandler = function (button) {
+    button.addEventListener("click", function () {
+      var formData = {
+        product_id: button.getAttribute("data-id"),
+      };
+  
+      var request = new XMLHttpRequest();
+  
+      request.addEventListener("load", function () {
+        //Errors handlers
+        let responseCode = request.responseText.split("=");
+        switch (responseCode[0]) {
+          case "1": {
+            showError(
+              "Для добавления товара в корзину необходимо войти в аккаунт"
+            );
+            enterButton.style.display = "block";
+            break;
+          }
+          case "2": {
+            showError("Не удалось подлючиться к базе данных");
+            enterButton.style.display = "none";
+            break;
+          }
+          default: {
+            errorMessage.style.display = "none";
+  
+            //If in the catalog page, using hint
+            if (document.location.pathname == "/catalog.php") {
+              showHint(button, responseCode);
+            } else {
+              //Else changing button text
+              changeButtonText(button, responseCode);
+            }
+          }
+        }
+      });
+  
+      //Sending form data
+      request.open("POST", "assets/php/add_to_cart_handler.php", true);
+      request.setRequestHeader(
+        "Content-Type",
+        "application/x-www-form-urlencoded; charset=UTF-8"
+      );
+      request.send("product_id=" + encodeURIComponent(formData.product_id));
+    });
+  };
+  
+  for (let i = 0; i < buttons.length; i++) {
+    addButtonClickHandler(buttons[i]);
+  }
+  
+  errorWindow.addEventListener("click", function () {
+    error.style.animation = "hide 0.3s ease";
+    setTimeout(function() {
+      error.style.display = "none";
+    }, 290);
+    
+  });
+}
+
+
+
+

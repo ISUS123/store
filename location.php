@@ -6,18 +6,6 @@ require_once 'header.php';
     <div class="location-page">
         <div class="container">
             <div class="map">
-                <div style="position:relative;overflow:hidden;">
-                    <div class="loading-circle">
-                        <div class="lds-ring">
-                            <div></div>
-                            <div></div>
-                            <div></div>
-                            <div></div>
-                        </div>
-                    </div>
-                    <iframe src="https://yandex.ru/map-widget/v1/-/CCUJnSDhCD" width="100%" height="600" frameborder="0" allowfullscreen="true" style="position:relative;">
-                    </iframe>
-                </div>
             </div>
     
             <div class="contacts">
@@ -27,11 +15,11 @@ require_once 'header.php';
                 </div>
                 <div class="phone-number">
                     <p class="contact-title">Номер телефона</p>
-                    <p>8 (800) 770-79-99</p>
+                    <a href="tel:8-800-11-01-123">8-800-11-01-123</a>
                 </div>
                 <div class="email">
                     <p class="contact-title">Email</p>
-                    <p>copy-star@yandex.ru</p>
+                    <a href="mailto:copy-star@yandex.ru">copy-star@yandex.ru</a>
                 </div>
             </div>
         </div>

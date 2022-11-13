@@ -1,7 +1,7 @@
 let authBox = document.querySelector(".auth-box");
 let submitButton = authBox.querySelector(".submit");
 let errorMessage = authBox.querySelector(".error-message");
-var form = document.querySelector("#form");
+let form = document.querySelector("#form");
 
 form.addEventListener("submit", function (evt) {
   
@@ -16,7 +16,7 @@ form.addEventListener("submit", function (evt) {
     errorMessage.classList.remove("show");
 
   //Getting form data
-  var formData = {
+  let formData = {
     name: document.querySelector("input[name='name']").value,
     surname: document.querySelector("input[name='surname']").value,
     patronym: document.querySelector("input[name='patronymic']").value,
@@ -25,7 +25,7 @@ form.addEventListener("submit", function (evt) {
     password: document.querySelector("input[name='password']").value,
   };
 
-  var request = new XMLHttpRequest();
+  let request = new XMLHttpRequest();
 
   request.addEventListener("load", function () {
     //Login and Email check
