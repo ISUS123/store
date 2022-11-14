@@ -1,6 +1,7 @@
 let authBox = document.querySelector(".auth-box");
 let submitButton = authBox.querySelector(".submit");
 let errorMessage = authBox.querySelector(".error-message");
+let content = document.querySelector("content");
 
 form.addEventListener("submit", function (evt) {
     evt.preventDefault();
@@ -15,20 +16,21 @@ form.addEventListener("submit", function (evt) {
     
       request.addEventListener("load", function () {
         //Errors handlers
-        if (request.responseText == '1') { //Wrong login
+        if (request.responseText == '1') {
           errorMessage.textContent = "Аккаунт с данным логином не найден";
           errorMessage.classList.add("show");
-        } else if (request.responseText == '2') { //Wrong password
+        } else if (request.responseText == '2') {
           errorMessage.textContent = "Неверный пароль"
           errorMessage.classList.add("show");
-        } else if (request.responseText == '3') { //Login successful
-          document.location.href = 'cart.php';
+        } else if (request.responseText) { 
           errorMessage.classList.remove("show");
+          authBox.style.display = 'none';
+          content.innerHTML = request.response;
         }
       });
     
       //Sending form data
-      request.open("POST", "assets/php/login_handler.php", true);
+      request.open("POST", "assets/php/admin_pages/admin_handler.php", true);
       request.setRequestHeader(
         "Content-Type",
         "application/x-www-form-urlencoded; charset=UTF-8"

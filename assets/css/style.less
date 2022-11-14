@@ -57,8 +57,8 @@ body {
 
 .container {
   margin: 0 auto;
-  max-width: 75em;
-  min-width: 45em;
+  max-width: 1200px;
+  min-width: 600px;
 }
 
 content {
@@ -415,8 +415,8 @@ Auth/register form styles
     padding-top: 10px;
     padding-bottom: 10px;
     padding-left: 10px;
-    margin-bottom: 10px;
     margin: 0;
+    margin-bottom: 10px;
   }
 
   .form-wrapper {
@@ -1326,4 +1326,61 @@ footer {
     font-size: 12px;
     margin-bottom: 0;
    }
+}
+
+/*****************
+Admin Panel Styles
+******************/
+
+.admin-panel {
+  min-height: 780px;
+  min-width: 1200px;
+  display: flex;
+
+  .admin-navbar {
+  animation: reveal 0.5s ease;
+  border-radius: 5px;
+  width: fit-content;
+  height: fit-content;
+  padding: 10px;
+  box-shadow: 0 4px 5px 0 rgba(@shadow-color, 0.14),
+    0 1px 10px 0 rgba(@shadow-color, 0.12), 0 2px 4px 0 rgba(@shadow-color, 0.2);
+    background-color: @background-color;
+  }
+
+  .admin-content {
+    margin-left: 10px;
+  }
+
+  a:hover {
+    transition: color .3s ease;
+    color: black;
+  }
+
+  table {
+    border: 1px solid #dddddd;
+    border-collapse: collapse; 
+  }
+  table th {
+    font-weight: bold;
+    padding: 5px;
+    background: #e5e5e5;
+    border: 1px solid #dddddd;
+  }
+  table td {
+    border: 1px solid #dddddd;
+    padding: 5px;
+    max-width: 100px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    background-color: @background-color;
+  }
+
+  table td:hover {
+    max-width: fit-content;
+    overflow: inherit;
+    text-overflow: inherit;
+    white-space: inherit;
+  }
 }
