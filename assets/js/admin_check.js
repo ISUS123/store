@@ -3,6 +3,22 @@ let submitButton = authBox.querySelector(".submit");
 let errorMessage = authBox.querySelector(".error-message");
 let content = document.querySelector("content");
 
+function loadScript(url, callback)
+{
+    // Adding the script tag to the head as suggested before
+    let script = document.createElement('script');
+    script.type = 'text/javascript';
+    script.src = url;
+
+    // Then bind the event to the callback function.
+    // There are several events for cross browser compatibility.
+    script.onreadystatechange = callback;
+    script.onload = callback;
+
+    // Fire the loading
+    content.appendChild(script);
+}
+
 form.addEventListener("submit", function (evt) {
     evt.preventDefault();
 
@@ -26,6 +42,7 @@ form.addEventListener("submit", function (evt) {
           errorMessage.classList.remove("show");
           authBox.style.display = 'none';
           content.innerHTML = request.response;
+          loadScript('assets/js/admin_controls.js');
         }
       });
     

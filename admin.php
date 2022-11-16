@@ -13,7 +13,7 @@ if(isset($_SESSION["session_adminname"])) {
         <div class='auth-box'>
             <p class='title'>Панель администратора</p>
             <div class='form-wrapper'>
-                <form action='assets/php/login_handler.php' method='post' id='form'>
+                <form action='#' method='post' id='form'>
                     <div class='standard-form'>
                         <div>
                             <label for='login'>Логин: </label>
@@ -33,7 +33,6 @@ if(isset($_SESSION["session_adminname"])) {
         </div>
     </div>
 </content>
-
 <script src='assets/js/admin_check.js'></script>";
 }
 ?>

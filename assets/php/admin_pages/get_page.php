@@ -40,7 +40,7 @@ switch ($page) {
             //Making item card
             echo "
                 <tr>
-                <td>$product_id</td>
+                <td class='id'>$product_id</td>
                 <td>$name</td>
                 <td>$date</td>
                 <td>$qnt шт.</td>
@@ -111,16 +111,16 @@ switch ($page) {
             //Making item card
             echo "
                 <tr>
-                <td>$product_id</td>
-                <td>$category_id</td>
+                <td class='id'>$product_id</td>
+                <td class='id'>$category_id</td>
                 <td>$product_name</td>
                 <td>$category_name</td>
-                <td>$description</td>
+                <td class='unfolding'><label for='checkbox$product_id'></label><input type='checkbox' id='checkbox$product_id'><p>$description</p></td>
                 <td>$year г.</td>
-                <td>$price р.</td>
-                <td>$img_url</td>
+                <td class='one-row'>$price р.</td>
+                <td class='image'><a href='assets/$img_url'><img src='assets/$img_url'></a></td>
                 <td>$date_added</td>
-                <td>$qnt шт.</td>
+                <td class='one-row'>$qnt шт.</td>
                 </tr>";
         }
         echo "</table>";
@@ -154,7 +154,7 @@ switch ($page) {
             //Making item card
             echo "
                 <tr>
-                <td>$category_id</td>
+                <td class='id'>$category_id</td>
                 <td>$category_name</td>
                 </tr>";
         }

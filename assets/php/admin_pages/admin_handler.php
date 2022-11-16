@@ -3,6 +3,10 @@ session_start();
 
 require_once('../connection.php');
 
+if(isset($_POST["login"]) && isset($_POST["password"])) {
+
+};
+
 $admin_login = 'admin'; //Admin login and password
 $admin_password = 'admin11';
 
