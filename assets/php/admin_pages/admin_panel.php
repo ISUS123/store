@@ -11,6 +11,18 @@
             <div class="admin-content">
     
             </div>
+            <div class="edit-wrapper">
+                <div class="edit-menu">
+                    <p class="title">Редактирование данных</p>
+                    <form action="#">
+                        <textarea name="edit-content" cols="30" rows="10" required></textarea>
+                        <div class="edit-buttons">
+                            <input type="reset" value="Отмена">
+                            <input type="submit" value="Подтвердить">
+                        </div>
+                    </form>
+                </div>
+            </div>
         </div>
     </div>
 </content>

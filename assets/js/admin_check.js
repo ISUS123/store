@@ -47,7 +47,7 @@ form.addEventListener("submit", function (evt) {
       });
     
       //Sending form data
-      request.open("POST", "assets/php/admin_pages/admin_handler.php", true);
+      request.open("POST", "assets/php/admin_pages/admin_login.php", true);
       request.setRequestHeader(
         "Content-Type",
         "application/x-www-form-urlencoded; charset=UTF-8"

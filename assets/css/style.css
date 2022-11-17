@@ -1120,11 +1120,12 @@ Admin Panel Styles
   box-shadow: 0 4px 5px 0 rgba(99, 79, 116, 0.14), 0 1px 10px 0 rgba(99, 79, 116, 0.12), 0 2px 4px 0 rgba(99, 79, 116, 0.2);
   background-color: white;
 }
-.admin-panel .admin-navbar .title {
+.admin-panel .title {
   margin: 0;
   padding: 10px;
   background-color: #f2f2f2;
   margin-bottom: 5px;
+  white-space: nowrap;
 }
 .admin-panel .admin-navbar li {
   margin-left: 10px;
@@ -1157,12 +1158,75 @@ Admin Panel Styles
   border: 1px solid #dddddd;
 }
 .admin-panel table td {
+  position: relative;
   transition: all 0.2s ease;
   transition-delay: 0.3s;
   border: 1px solid #dddddd;
   padding: 5px;
   background-color: white;
   vertical-align: top;
+}
+.admin-panel table td:hover .edit-button {
+  transition: opacity 0.2s ease;
+  opacity: 0.3;
+}
+.admin-panel .edit-button {
+  display: block;
+  content: "";
+  position: absolute;
+  top: 1px;
+  left: -30px;
+  width: 30px;
+  height: 30px;
+  background-image: url("../img/edit_FILL0_wght400_GRAD0_opsz48.svg");
+  background-size: cover;
+  opacity: 0.6;
+  left: unset;
+  top: unset;
+  bottom: 0;
+  right: 0;
+  opacity: 0;
+  cursor: pointer;
+  transition: opacity 0.2s ease;
+  transition-delay: 0.1s;
+}
+.admin-panel .edit-wrapper {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  min-height: 100vh;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  visibility: hidden;
+}
+.admin-panel .edit-menu {
+  visibility: inherit;
+  border-radius: 5px;
+  height: fit-content;
+  width: fit-content;
+  box-shadow: 0 4px 5px 0 rgba(99, 79, 116, 0.14), 0 1px 10px 0 rgba(99, 79, 116, 0.12), 0 2px 4px 0 rgba(99, 79, 116, 0.2);
+  background-color: white;
+}
+.admin-panel .edit-menu form {
+  padding: 10px;
+}
+.admin-panel .edit-menu .edit-buttons {
+  display: flex;
+  justify-content: space-between;
+}
+.admin-panel .edit-menu .edit-buttons input {
+  background-color: white;
+  padding: 10px;
+  border: 1px solid #bdbdbd;
+}
+.admin-panel .edit-menu .edit-buttons input:hover {
+  background-color: #f6f6f6;
+}
+.admin-panel .edit-menu .edit-buttons input:active {
+  background-color: #eaeaea;
 }
 .admin-panel table .one-row {
   white-space: nowrap;
@@ -1193,6 +1257,7 @@ Admin Panel Styles
   display: block;
   width: 100%;
   height: 100%;
+  cursor: pointer;
 }
 .admin-panel table input[type='checkbox']:checked ~ p {
   width: auto;

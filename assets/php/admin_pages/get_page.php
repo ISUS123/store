@@ -39,12 +39,12 @@ switch ($page) {
 
             //Making item card
             echo "
-                <tr>
+                <tr data-id='$product_id'>
                 <td class='id'>$product_id</td>
-                <td>$name</td>
-                <td>$date</td>
-                <td>$qnt шт.</td>
-                <td>$cost р.</td>
+                <td data-section='name'>$name</td>
+                <td data-section='date'>$date</td>
+                <td data-section='qnt'>$qnt шт.</td>
+                <td data-section='cost'>$cost р.</td>
                 </tr>";
                 
         }
@@ -110,17 +110,17 @@ switch ($page) {
 
             //Making item card
             echo "
-                <tr>
+                <tr data-id='$product_id'>
                 <td class='id'>$product_id</td>
-                <td class='id'>$category_id</td>
-                <td>$product_name</td>
+                <td class='id' data-section='category_id'>$category_id</td>
+                <td data-section='name'>$product_name</td>
                 <td>$category_name</td>
-                <td class='unfolding'><label for='checkbox$product_id'></label><input type='checkbox' id='checkbox$product_id'><p>$description</p></td>
-                <td>$year г.</td>
-                <td class='one-row'>$price р.</td>
-                <td class='image'><a href='assets/$img_url'><img src='assets/$img_url'></a></td>
-                <td>$date_added</td>
-                <td class='one-row'>$qnt шт.</td>
+                <td class='unfolding' data-section='description'><label for='checkbox$product_id'></label><input type='checkbox' id='checkbox$product_id'><p>$description</p></td>
+                <td data-section='year'>$year г.</td>
+                <td class='one-row' data-section='price'>$price р.</td>
+                <td class='image' data-section='img_url'><a href='assets/$img_url'><img src='assets/$img_url'></a></td>
+                <td data-section='date_added'>$date_added</td>
+                <td class='one-row' data-section='qnt'>$qnt шт.</td>
                 </tr>";
         }
         echo "</table>";
@@ -153,9 +153,9 @@ switch ($page) {
 
             //Making item card
             echo "
-                <tr>
+                <tr data-id='$category_id'>
                 <td class='id'>$category_id</td>
-                <td>$category_name</td>
+                <td data-section='name'>$category_name</td>
                 </tr>";
         }
         echo "</table>";
