@@ -42,7 +42,7 @@ form.addEventListener("submit", function (evt) {
       }
       case '3': {
         errorMessage.classList.remove("show");
-        window.location.href = 'login.php';
+        window.location.href = 'login';
         break;
       }
     }

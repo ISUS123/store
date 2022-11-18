@@ -61,7 +61,7 @@ require_once 'assets/php/connection.php';
                             <div class='item-left'>
                                 <span>$name</span>
                                 <p>$description</p>
-                                <a href='product.php?product_id=$product_id'>Страница товара</a>
+                                <a href='product?product_id=$product_id'>Страница товара</a>
                                 <span>$price р.</span>
                             </div>
                             <div class='item-right'>

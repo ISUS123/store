@@ -5,7 +5,7 @@ $page = $_POST['page'];
 
 switch ($page) {
     case 'order':
-        $query = "SELECT `order`.`product_id`, `product`.`name`, `order`.`date`, `order`.`qnt`, `order`.`cost` FROM `order` INNER JOIN product ON `order`.product_id = product.product_id";
+        $query = "SELECT `order`.`order_id`,  `order`.`product_id`, `product`.`name`, `order`.`date`, `order`.`qnt`, `order`.`cost`, `order`.`status` FROM `order` INNER JOIN product ON `order`.product_id = product.product_id";
 
         $result = mysqli_query($link, $query);
         if (mysqli_num_rows($result) > 0) {
@@ -13,7 +13,10 @@ switch ($page) {
         <table>
         <tr>
         <th>
-        ID
+        ID заказа
+        </th>
+        <th>
+        ID товара
         </th>
         <th>
         Название товара
@@ -27,24 +30,31 @@ switch ($page) {
         <th>
         Сумма заказа
         </th>
+        <th>
+        Статус
+        </th>
         </tr>
         ";
         //Getting items from database
         while ($row = mysqli_fetch_array($result)) { 
+            $order_id = $row['order_id'];
             $product_id = $row['product_id']; 
             $name = $row['name'];
             $date = $row['date'];
             $qnt = $row['qnt'];
             $cost = $row['cost'];
+            $status = $row['status'];
 
             //Making item card
             echo "
-                <tr data-id='$product_id'>
-                <td class='id'>$product_id</td>
-                <td data-section='name'>$name</td>
-                <td data-section='date'>$date</td>
+                <tr data-id='$order_id'>
+                <td class='id non-edit'>$order_id</td>
+                <td class='id' data-section='product_id'>$product_id</td>
+                <td class='non-edit' data-section='name'>$name</td>
+                <td data-section='date' class='non-edit'>$date</td>
                 <td data-section='qnt'>$qnt шт.</td>
                 <td data-section='cost'>$cost р.</td>
+                <td data-section='status'>$status</td>
                 </tr>";
                 
         }
@@ -111,10 +121,10 @@ switch ($page) {
             //Making item card
             echo "
                 <tr data-id='$product_id'>
-                <td class='id'>$product_id</td>
+                <td class='id non-edit'>$product_id</td>
                 <td class='id' data-section='category_id'>$category_id</td>
                 <td data-section='name'>$product_name</td>
-                <td>$category_name</td>
+                <td class='category-name non-edit'>$category_name</td>
                 <td class='unfolding' data-section='description'><label for='checkbox$product_id'></label><input type='checkbox' id='checkbox$product_id'><p>$description</p></td>
                 <td data-section='year'>$year г.</td>
                 <td class='one-row' data-section='price'>$price р.</td>
@@ -154,7 +164,7 @@ switch ($page) {
             //Making item card
             echo "
                 <tr data-id='$category_id'>
-                <td class='id'>$category_id</td>
+                <td class='id non-edit'>$category_id</td>
                 <td data-section='name'>$category_name</td>
                 </tr>";
         }

@@ -13,9 +13,7 @@ $current_page = $_POST["current_page"];
 
 $query = "UPDATE `$current_page` SET `$to_edit` = '$new_content' WHERE {$current_page}_id = $id ";
 
-// $result = mysqli_query($link, $query);
-
-echo $query;
+$result = mysqli_query($link, $query);
 
 mysqli_close($link);
 ?>

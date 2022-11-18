@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Хост: 127.0.0.1:3306
--- Время создания: Окт 28 2022 г., 13:51
+-- Время создания: Ноя 18 2022 г., 09:34
 -- Версия сервера: 5.7.39
 -- Версия PHP: 7.2.34
 
@@ -90,8 +90,17 @@ CREATE TABLE `order` (
   `customer_id` int(11) NOT NULL,
   `cost` int(11) NOT NULL,
   `qnt` int(11) NOT NULL,
-  `date` date NOT NULL
+  `date` date NOT NULL,
+  `status` varchar(32) COLLATE utf8mb4_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Дамп данных таблицы `order`
+--
+
+INSERT INTO `order` (`order_id`, `product_id`, `customer_id`, `cost`, `qnt`, `date`, `status`) VALUES
+(1, 6, 34, 34520, 1, '2022-11-18', 'Отгрузка'),
+(2, 9, 34, 7500, 1, '2022-11-18', 'Отгрузка');
 
 -- --------------------------------------------------------
 
@@ -116,10 +125,10 @@ CREATE TABLE `product` (
 --
 
 INSERT INTO `product` (`product_id`, `category_id`, `name`, `description`, `year`, `price`, `img_url`, `date_added`, `qnt`) VALUES
-(6, 2, 'МФУ HP LaserJet Pro M227sdn (G3Q74A)', 'МФУ (принтер/сканер/копир), лазерная черно-белая печать, A4, двусторонняя печать, планшетный/протяжный сканер, ЖК панель, сетевой (Ethernet), AirPrint', 2005, 34520, 'img/media/mfu1.jpg', '2022-06-22', 6),
+(6, 2, 'МФУ HP LaserJet Pro M227sdn (G3Q74A)', 'МФУ (принтер/сканер/копир), лазерная черно-белая печать, A4, двусторонняя печать, планшетный/протяжный сканер, ЖК панель, сетевой (Ethernet), AirPrint', 2005, 34520, 'img/media/mfu1.jpg', '2022-06-22', 5),
 (7, 2, 'МФУ Brother DCP-L2500DR', 'МФУ (принтер/сканер/копир), лазерная черно-белая печать, A4, двусторонняя печать, планшетный сканер, ЖК панель', 2008, 34290, 'img/media/mfu2.jpg', '2022-06-20', 3),
 (8, 4, 'Принтер Epson L1800', 'принтер, струйная цветная печать, A3, печать фотографий', 2012, 8000, 'img/media/printer1.jpg', '2022-06-19', 4),
-(9, 1, 'Принтер Canon PIXMA G1411', 'принтер, лазерная печать, A4, печать фотографий', 2014, 7500, 'img/media/printer2.jpg', '2022-06-17', 11),
+(9, 1, 'Принтер Canon PIXMA G1411', 'принтер, лазерная печать, A4, печать фотографий', 2014, 7500, 'img/media/printer2.jpg', '2022-06-17', 10),
 (10, 3, 'Сканер Avision FB5000', 'планшетный сканер, формат A3, интерфейс USB 2.0, разрешение 600x600 dpi, датчик типа CIS', 2008, 5000, 'img/media/scaner1.jpg', '2022-06-14', 9),
 (11, 3, 'Сканер Avision', 'Нет описания', 2016, 10000, 'img/media/scaner2.jpg', '2022-06-23', 0);
 
@@ -172,7 +181,7 @@ ALTER TABLE `product`
 -- AUTO_INCREMENT для таблицы `cart`
 --
 ALTER TABLE `cart`
-  MODIFY `cart_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
+  MODIFY `cart_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT для таблицы `category`
@@ -190,7 +199,7 @@ ALTER TABLE `customer`
 -- AUTO_INCREMENT для таблицы `order`
 --
 ALTER TABLE `order`
-  MODIFY `order_id` int(10) NOT NULL AUTO_INCREMENT;
+  MODIFY `order_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT для таблицы `product`

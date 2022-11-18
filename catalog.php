@@ -38,7 +38,7 @@ require_once "assets/php/connection.php";
     <div class="error-wrapper">
     <div class="error">
         <p></p>
-        <a class="button enter" href="login.php">Войти</a>
+        <a class="button enter" href="login">Войти</a>
     </div>
 </div>
 </content>

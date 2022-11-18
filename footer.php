@@ -7,8 +7,8 @@
                     Компания
                 </h6>
                 <ul class="navmenu-submenu">
-                    <li class="navmenu-link"><a href="about_company.php">О Компании</a></li>
-                    <li class="navmenu-link"><a href="location.php">Расположение</a></li>
+                    <li class="navmenu-link"><a href="about_company">О Компании</a></li>
+                    <li class="navmenu-link"><a href="location">Расположение</a></li>
                 </ul>
             </div>
 

@@ -27,8 +27,7 @@ let sendEditQuery = function (id, toEdit, newContent, page) {
   let request = new XMLHttpRequest();
 
   request.onload = function () {
-    console.log(request.response);
-    // getPage(page);
+    getPage(page);
   };
 
   request.open("POST", "assets/php/admin_pages/admin_edit.php");
@@ -48,44 +47,45 @@ let sendEditQuery = function (id, toEdit, newContent, page) {
   );
 }
 
+editForm.addEventListener('submit', function(evt) {
+  evt.preventDefault();
+  sendEditQuery(itemId, toEdit, editContent.value, currentPage);
+  editContent.value = " ";
+  editWrapper.style.visibility = 'hidden';
+});
+
+editForm.addEventListener('reset', function(evt) {
+  editWrapper.style.visibility = 'hidden';
+});
+
+let itemId = '';
+let toEdit = '';
+
 let setControls = function (page) {
   //General controls
   let tableCells = document.getElementsByTagName("td");
 
   for (let i = 0; i < tableCells.length; i++) {
     //Creating edit button on every table cell
-    if(!(tableCells[i].classList.contains('id'))) {
-      let editButton = document.createElement("div");
-      editButton.classList.add("edit-button");
-  
-      tableCells[i].appendChild(editButton);
+    if(!(tableCells[i].classList.contains('non-edit'))) 
+    {let editButton = document.createElement("div");
+    editButton.classList.add("edit-button");
+
+    tableCells[i].appendChild(editButton);
     }
   }
 
   let editButtons = document.querySelectorAll(".edit-button");
-
-  let itemId = '';
-  let toEdit = '';
 
   for (let i = 0; i < editButtons.length; i++) {
     editButtons[i].addEventListener("click", function () {
       itemId = editButtons[i].parentElement.parentElement.dataset.id;
       toEdit = editButtons[i].parentElement.dataset.section;
       editWrapper.style.visibility = 'visible';
-      // editContent.textContent = editButtons[i].textContent; //Current text should appear in edit menu
-      console.log('item id: ' + itemId);
-      console.log('section to edit: ' + toEdit);
+      // editContent.value = editButtons[i].textContent; //Current text should appear in edit menu
     });
   }
 
-  editForm.addEventListener('submit', function(evt) {
-    evt.preventDefault();
-    sendEditQuery(itemId, toEdit, editContent.value, currentPage);
-  });
-
-  editForm.addEventListener('reset', function(evt) {
-    editWrapper.style.visibility = 'hidden';
-  });
 
   //Controls for items page
 

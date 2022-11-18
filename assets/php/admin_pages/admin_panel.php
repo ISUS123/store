@@ -15,7 +15,7 @@
                 <div class="edit-menu">
                     <p class="title">Редактирование данных</p>
                     <form action="#">
-                        <textarea name="edit-content" cols="30" rows="10" required></textarea>
+                        <textarea name="edit-content" required></textarea>
                         <div class="edit-buttons">
                             <input type="reset" value="Отмена">
                             <input type="submit" value="Подтвердить">

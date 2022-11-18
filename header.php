@@ -14,25 +14,25 @@
 <header>
     <div class="container">
         <div class="menus">
-            <a href="about_company.php" class="menu-button button-about">О нас
+            <a href="about_company" class="menu-button button-about">О нас
                 <img src="../assets/img/logo.png" alt="" class="company-logo">
             </a>
-            <a href="catalog.php" class="menu-button">Каталог</a>
-            <a href="location.php" class="menu-button">Где нас найти?</a>
-            <a href="admin.php" class="menu-button">Админ-панель</a>
+            <a href="catalog" class="menu-button">Каталог</a>
+            <a href="location" class="menu-button">Где нас найти?</a>
+            <a href="admin" class="menu-button">Админ-панель</a>
         </div>
 
         <?php
         //Changing header buttons if user authorized
         if (empty($_SESSION["session_username"])) {
             echo "<div class='auth-buttons'>
-                <a href='login.php' class='menu-button button-login auth'>Вход</a>
-                <a href='register.php' class='menu-button button-register auth'>Регистрация</a>
+                <a href='login' class='menu-button button-login auth'>Вход</a>
+                <a href='register' class='menu-button button-register auth'>Регистрация</a>
             </div>";
         } else {
             echo "<div class='auth-buttons'>
-                <a href='cart.php' class='menu-button button-cart'>Корзина</a>
-                <a href='assets/php/logout.php' class='menu-button button-login auth'>Выход</a>
+                <a href='cart' class='menu-button button-cart'>Корзина</a>
+                <a href='assets/php/logout' class='menu-button button-login auth'>Выход</a>
             </div>";
         }
         ?>

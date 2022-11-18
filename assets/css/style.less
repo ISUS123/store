@@ -152,7 +152,7 @@ select:last-child {
   color: #808080;
   visibility: hidden;
   opacity: 0;
-  width: 212px;
+  width: 270px;
 }
 
 .hide {
@@ -1350,7 +1350,7 @@ Admin Panel Styles
   .title {
     margin: 0;
     padding: 10px;
-    background-color: #f2f2f2;
+    background-color:#f2f2f2;
     margin-bottom: 5px;
     white-space: nowrap;
   }
@@ -1403,7 +1403,7 @@ Admin Panel Styles
 
   table td:hover .edit-button {
     transition: opacity .2s ease;
-    opacity: 0.3;
+    opacity: 1;
   }
 
   .edit-button {
@@ -1442,11 +1442,16 @@ Admin Panel Styles
     background-color: @background-color;
   }
 
+  .edit-menu .title {
+    margin-bottom: 0;
+  }
+
   .edit-menu form {
     padding: 10px;
   }
 
   .edit-menu .edit-buttons {
+    margin-top: 5px;
     display: flex;
     justify-content: space-between;
   }
@@ -1474,6 +1479,11 @@ Admin Panel Styles
     max-width: 10px;
     width: 10px;
     text-align: center;
+  }
+
+  table .category-name {
+    text-align: center;
+    vertical-align: middle;
   }
 
   table .image {
@@ -1507,21 +1517,6 @@ Admin Panel Styles
     width: auto;
     height: auto;
   }
-
-  // table .unfolding p {
-  //   transition: all .2s ease;
-  //   transition-delay: 0.3s;
-  //   width: 100px;
-  //   height: 100px;
-  //   overflow: hidden;
-  // }
-
-  // table .unfolding:hover p {
-  //   transition: all .2s ease;
-  //   transition-delay: 0.3s;
-  //   height: 200px;
-  //   width: 300px;
-  // }
 
   table img {
     width: 100px;
