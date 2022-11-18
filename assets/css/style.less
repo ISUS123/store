@@ -1419,6 +1419,28 @@ Admin Panel Styles
     transition-delay: .1s;
   }
 
+  .delete-button {
+    background-image: url("../img/delete_FILL0_wght400_GRAD0_opsz48.svg");
+  }
+
+  .add-button {
+    background-color: white;
+    padding: 10px;
+    margin-top: 10px;
+    border: 1px solid #bdbdbd; 
+    width: fit-content;
+    cursor: pointer;
+    user-select: none;
+  }
+
+  .add-button:hover {
+    background-color: #f6f6f6;
+  }
+
+  .add-button:active {
+    background-color: #eaeaea;
+  }
+
   .edit-wrapper {
     position: fixed;
     top: 0;
@@ -1432,8 +1454,8 @@ Admin Panel Styles
     visibility: hidden;
   }
 
-  .edit-menu {
-    visibility: inherit;
+  .menu {
+    display: none;
     border-radius: 5px;
     height: fit-content;
     width: fit-content;
@@ -1442,31 +1464,45 @@ Admin Panel Styles
     background-color: @background-color;
   }
 
-  .edit-menu .title {
+  .add-menu form {
+    display: none;
+  }
+
+  .add-menu .field {
+    display: flex;
+    justify-content: space-between;
+    padding: 5px;
+  }
+
+  .add-menu label {
+    margin-right: 5px;
+  }
+
+  .edit-wrapper .title {
     margin-bottom: 0;
   }
 
-  .edit-menu form {
+  .edit-wrapper form {
     padding: 10px;
   }
 
-  .edit-menu .edit-buttons {
+  .edit-wrapper .edit-buttons {
     margin-top: 5px;
     display: flex;
     justify-content: space-between;
   }
 
-  .edit-menu .edit-buttons input {
+  .edit-wrapper .edit-buttons input {
     background-color: white;
     padding: 10px;
     border: 1px solid #bdbdbd;
   }
 
-  .edit-menu .edit-buttons input:hover {
+  .edit-wrapper .edit-buttons input:hover {
     background-color: #f6f6f6;
   }
 
-  .edit-menu .edit-buttons input:active {
+  .edit-wrapper .edit-buttons input:active {
     background-color: #eaeaea;
   }
  

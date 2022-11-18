@@ -1,4 +1,3 @@
-<content>
     <div class='container'>
         <div class='admin-panel'>
             <ul class="admin-navbar">
@@ -9,13 +8,72 @@
                 <li><a class="logout-button" href="assets/php/admin_pages/admin_logout.php">Выход</a></li>
             </ul>
             <div class="admin-content">
-    
+
             </div>
             <div class="edit-wrapper">
-                <div class="edit-menu">
+                <div class="edit-menu menu">
                     <p class="title">Редактирование данных</p>
                     <form action="#">
-                        <textarea name="edit-content" required></textarea>
+                        <textarea name="edit-content" cols="30" rows="10" required></textarea>
+                        <div class="edit-buttons">
+                            <input type="reset" value="Отмена">
+                            <input type="submit" value="Подтвердить">
+                        </div>
+                    </form>
+                </div>
+                <div class="delete-menu menu">
+                    <p class="title">Удаление данных</p>
+                    <form action="#">
+                        <p>Вы действительно хотите удалить этот элемент?</p>
+                        <div class="edit-buttons">
+                            <input type="reset" value="Отмена">
+                            <input type="submit" value="Подтвердить">
+                        </div>
+                    </form>
+                </div>
+                <div class="add-menu menu">
+                    <p class="title">Добавление элемента</p>
+                    <form action="#" id='product'>
+                        <div class="field">
+                            <label for="category_id">ID категории:</label>
+                            <input type="text" id='category_id' name='category_id' required>
+                        </div>
+                        <div class="field">
+                            <label for="name">Название:</label>
+                            <input type="text" id='name' name='name' required>
+                        </div>
+                        <div class="field">
+                            <label for="description">Описание:</label>
+                            <input type="text" id='description' name='description' required>
+                        </div>
+                        <div class="field">
+                            <label for="year">Год выпуска:</label>
+                            <input type="text" id='year' name='year' required>
+                        </div>
+                        <div class="field">
+                            <label for="price">Цена:</label>
+                            <input type="text" id='price' name='price' required>
+                        </div>
+                        <div class="field">
+                            <label for="img_url">Ссылка на изображение:</label>
+                            <input type="text" id='img_url' name='img_url' required>
+                        </div>
+                        <div class="field">
+                            <label for="qnt">Количество:</label>
+                            <input type="text" id='qnt' name='qnt' required>
+                        </div>
+                        <div class="edit-buttons">
+                            <input type="reset" value="Отмена">
+                            <input type="submit" value="Подтвердить">
+                        </div>
+                    </form>
+
+                    <form action="#" id='category'>
+                        <div class="field">
+                            <label for="category_name">Название категории:</label>
+                            <input type="text" id='category_name' name='category_name' required>
+                        </div>
+
                         <div class="edit-buttons">
                             <input type="reset" value="Отмена">
                             <input type="submit" value="Подтвердить">
@@ -25,6 +83,5 @@
             </div>
         </div>
     </div>
-</content>
 
 <script src="assets/js/admin_controls.js"></script>

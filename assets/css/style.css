@@ -117,7 +117,7 @@ select:last-child {
   color: #808080;
   visibility: hidden;
   opacity: 0;
-  width: 212px;
+  width: 270px;
 }
 .hide {
   width: 40px;
@@ -1168,7 +1168,7 @@ Admin Panel Styles
 }
 .admin-panel table td:hover .edit-button {
   transition: opacity 0.2s ease;
-  opacity: 0.3;
+  opacity: 1;
 }
 .admin-panel .edit-button {
   display: block;
@@ -1190,6 +1190,24 @@ Admin Panel Styles
   transition: opacity 0.2s ease;
   transition-delay: 0.1s;
 }
+.admin-panel .delete-button {
+  background-image: url("../img/delete_FILL0_wght400_GRAD0_opsz48.svg");
+}
+.admin-panel .add-button {
+  background-color: white;
+  padding: 10px;
+  margin-top: 10px;
+  border: 1px solid #bdbdbd;
+  width: fit-content;
+  cursor: pointer;
+  user-select: none;
+}
+.admin-panel .add-button:hover {
+  background-color: #f6f6f6;
+}
+.admin-panel .add-button:active {
+  background-color: #eaeaea;
+}
 .admin-panel .edit-wrapper {
   position: fixed;
   top: 0;
@@ -1202,30 +1220,45 @@ Admin Panel Styles
   justify-content: center;
   visibility: hidden;
 }
-.admin-panel .edit-menu {
-  visibility: inherit;
+.admin-panel .menu {
+  display: none;
   border-radius: 5px;
   height: fit-content;
   width: fit-content;
   box-shadow: 0 4px 5px 0 rgba(99, 79, 116, 0.14), 0 1px 10px 0 rgba(99, 79, 116, 0.12), 0 2px 4px 0 rgba(99, 79, 116, 0.2);
   background-color: white;
 }
-.admin-panel .edit-menu form {
+.admin-panel .add-menu form {
+  display: none;
+}
+.admin-panel .add-menu .field {
+  display: flex;
+  justify-content: space-between;
+  padding: 5px;
+}
+.admin-panel .add-menu label {
+  margin-right: 5px;
+}
+.admin-panel .edit-wrapper .title {
+  margin-bottom: 0;
+}
+.admin-panel .edit-wrapper form {
   padding: 10px;
 }
-.admin-panel .edit-menu .edit-buttons {
+.admin-panel .edit-wrapper .edit-buttons {
+  margin-top: 5px;
   display: flex;
   justify-content: space-between;
 }
-.admin-panel .edit-menu .edit-buttons input {
+.admin-panel .edit-wrapper .edit-buttons input {
   background-color: white;
   padding: 10px;
   border: 1px solid #bdbdbd;
 }
-.admin-panel .edit-menu .edit-buttons input:hover {
+.admin-panel .edit-wrapper .edit-buttons input:hover {
   background-color: #f6f6f6;
 }
-.admin-panel .edit-menu .edit-buttons input:active {
+.admin-panel .edit-wrapper .edit-buttons input:active {
   background-color: #eaeaea;
 }
 .admin-panel table .one-row {
@@ -1236,6 +1269,10 @@ Admin Panel Styles
   max-width: 10px;
   width: 10px;
   text-align: center;
+}
+.admin-panel table .category-name {
+  text-align: center;
+  vertical-align: middle;
 }
 .admin-panel table .image {
   vertical-align: middle;

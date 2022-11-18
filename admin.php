@@ -6,7 +6,9 @@ require_once "assets/php/connection.php";
 
 <?php
 if(isset($_SESSION["session_adminname"])) {
+    echo "<content>";
     require_once "assets/php/admin_pages/admin_panel.php";
+    echo "</content>";
 } else {
     echo "<content>
     <div class='container'>

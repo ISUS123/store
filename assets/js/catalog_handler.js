@@ -136,7 +136,7 @@ let addToCartUpdate = function() {
             errorMessage.style.display = "none";
   
             //If in the catalog page, using hint
-            if (document.location.pathname == "/catalog.php") {
+            if (document.location.pathname == "/catalog") {
               showHint(button, responseCode);
             } else {
               //Else changing button text
