@@ -84,6 +84,11 @@ let sendAddQuery = function (obj, page) {
   let request = new XMLHttpRequest();
 
   request.onload = function () {
+    for(let i = 0; i < addFormInputs.length-2; i++) {
+      addFormInputs[i].value = " ";
+    }
+
+    console.log(request.response);
     getPage(page);
   }
 
@@ -200,32 +205,44 @@ let formData = {
 
 let itemId = '';
 let toEdit = '';
+let addFormInputs;
 
 let setControls = function (page) {
   //General controls
   let tableCells = document.getElementsByTagName("td");
 
-  let addButtonEl = document.createElement("div");
-  addButtonEl.classList.add("add-button");
-  addButtonEl.textContent = "Добавить";
+  if(currentPage != 'order') { //If on order page, hide add button
 
-  let addButton = adminContent.appendChild(addButtonEl);
+    if(currentPage == 'product') {
+      addFormInputs = productForm.querySelectorAll('input');
+    } else if(currentPage = 'category') {
+      addFormInputs = categoryForm.querySelectorAll('input');
+    };
 
-  addButton.addEventListener("click", function() {
-    editWrapper.style.visibility = 'visible';
-    addMenu.style.display = "block";
+    let addButtonEl = document.createElement("div");
+    addButtonEl.classList.add("add-button");
+    addButtonEl.textContent = "Добавить";
 
-    switch(currentPage) {
-      case 'product': 
-        categoryForm.style.display = "none";
-        productForm.style.display = "block";
-      break;
-      case 'category': 
-        productForm.style.display = "none";
-        categoryForm.style.display = "block";
-      break;
-    }
-  });
+    let addButton = adminContent.appendChild(addButtonEl);
+
+    addButton.addEventListener("click", function() {
+      editWrapper.style.visibility = 'visible';
+      addMenu.style.display = "block";
+
+      switch(currentPage) {
+        case 'product': 
+          categoryForm.style.display = "none";
+          productForm.style.display = "block";
+        break;
+        case 'category': 
+          productForm.style.display = "none";
+          categoryForm.style.display = "block";
+        break;
+      }
+    });
+  }
+
+  
 
   for (let i = 0; i < tableCells.length; i++) {
     //Creating edit button on every editable cell

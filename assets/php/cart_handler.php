@@ -153,7 +153,7 @@ if ($type == 3) { //Proceed item from cart to order
     $product_price = $result_product[0];
     $cost = $product_price * $qnt;
 
-    $query_order = "INSERT INTO `order` VALUES(NULL, $product_id, $customer_id, $cost, $qnt, curdate())";
+    $query_order = "INSERT INTO `order` VALUES(NULL, $product_id, $customer_id, $cost, $qnt, curdate(), 'Новый')";
     $result_order = mysqli_query($link, $query_order);
 
     if ($result_order) {
@@ -163,6 +163,17 @@ if ($type == 3) { //Proceed item from cart to order
         $result_update = mysqli_query($link, $query_update);
         exit();
     }
+}
+
+if ($type == 4) { //Password check
+    $password = $_POST['password'];
+    $query_password = "SELECT `customer_id` FROM customer WHERE `password` = $password";
+    $result_password = mysqli_query($link, $query_password);
+
+    if(mysqli_num_rows($result_password) > 0) {
+        exit("1");
+    }
+
 }
 
 mysqli_close($link);

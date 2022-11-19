@@ -3,6 +3,10 @@ session_start();
 
 require_once('../connection.php');
 
+$default_image = "img/media/default_image.jpg";
+
+$default_description = "Нет описания";
+
 $id = $_POST["id"];
 
 $current_page = $_POST["current_page"];
@@ -20,13 +24,27 @@ if(isset($_POST["add"])) {
         case "product":
             $category_id = $_POST['category_id'];
             $name = $_POST['name'];
-            $description = $_POST['description'];
+
+            if(empty($_POST['description'])) {
+                $description = $default_description;
+            } else {
+                $description = $_POST['description'];
+            }
+
             $year = $_POST['year'];
             $price = $_POST['price'];
-            $img_url = $_POST['img_url'];
+
+            if(empty($_POST['img_url'])) {
+                $img_url = $default_image;
+            } else {
+                $img_url = $_POST['img_url'];
+            }
+            
             $qnt = $_POST['qnt'];
 
             $query = "INSERT INTO `$current_page` VALUES(NULL, $category_id, '$name', '$description', '$year', '$price', '$img_url', CURDATE(), '$qnt')";
+
+            echo $query;
             
             $result = mysqli_query($link, $query);
 

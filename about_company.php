@@ -41,7 +41,7 @@ require_once 'assets/php/connection.php';
                     </svg>
                 </div>
                 <div class="slider-content">
-                    <p>5 последних товаров</p>
+                    <p>Новинки компании</p>
                     <div class="slider-line">
     
                         <?php

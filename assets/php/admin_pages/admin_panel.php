@@ -36,7 +36,7 @@
                     <form action="#" id='product'>
                         <div class="field">
                             <label for="category_id">ID категории:</label>
-                            <input type="text" id='category_id' name='category_id' required>
+                            <input type="number" id='category_id' name='category_id' required min='1'>
                         </div>
                         <div class="field">
                             <label for="name">Название:</label>
@@ -44,23 +44,23 @@
                         </div>
                         <div class="field">
                             <label for="description">Описание:</label>
-                            <input type="text" id='description' name='description' required>
+                            <input type="text" id='description' name='description'>
                         </div>
                         <div class="field">
                             <label for="year">Год выпуска:</label>
-                            <input type="text" id='year' name='year' required>
+                            <input type="number" id='year' name='year' required min='2000'>
                         </div>
                         <div class="field">
                             <label for="price">Цена:</label>
-                            <input type="text" id='price' name='price' required>
+                            <input type="number" id='price' name='price' required min='0'>
                         </div>
                         <div class="field">
                             <label for="img_url">Ссылка на изображение:</label>
-                            <input type="text" id='img_url' name='img_url' required>
+                            <input type="text" id='img_url' name='img_url'>
                         </div>
                         <div class="field">
                             <label for="qnt">Количество:</label>
-                            <input type="text" id='qnt' name='qnt' required>
+                            <input type="number" id='qnt' name='qnt' required min='0'>
                         </div>
                         <div class="edit-buttons">
                             <input type="reset" value="Отмена">

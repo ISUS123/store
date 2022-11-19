@@ -19,7 +19,7 @@ if (empty($_SESSION["session_username"])) {
     <div class='cart-page'>
         <div class='container'>
             <div class="cart-menu">
-                <form action="cart.php">
+                <form action="#">
                     <button class='items-in-cart' name='page' value="cart">Корзина</button>
                     <button class="orders" name='page' value="orders">Заказы</button>
                 </form>
@@ -29,12 +29,12 @@ if (empty($_SESSION["session_username"])) {
             </div> 
             <div class="password-wrapper">
                 <div class="password-check">
-                    <form action="cart.php" method="post">
+                    <form action="#">
                         <label for="pass">Для оформления заказа введите пароль от аккаунта: </label>
                         <div>
                             <input type="password" name="pass" id="pass">
-                            <input type="submit" value="Подтвердить">
-                            <input type="reset" value="Отмена">
+                            <input class="button" type="submit" value="Подтвердить">
+                            <input class="button" type="reset" value="Отмена">
                         </div>
                     </form>
                     <p class='error-message'></p>
