@@ -10,6 +10,9 @@ let editForm = editMenu.querySelector("form");
 let deleteMenu = editWrapper.querySelector(".delete-menu");
 let deleteForm = deleteMenu.querySelector("form");
 
+let declineOrderMenu = editWrapper.querySelector(".decline-menu");
+let declineForm = declineOrderMenu.querySelector("form");
+
 let addMenu = document.querySelector(".add-menu");
 let productForm = document.getElementById('product');
 let categoryForm = document.getElementById('category');
@@ -80,15 +83,36 @@ let sendDeleteQuery = function (id, page) {
   );
 }
 
+let sendDeclineQuery = function (id, declineReason, page) {
+  let request = new XMLHttpRequest();
+
+  request.onload = function () {
+    getPage(page);
+  }
+
+  request.open("POST", "assets/php/admin_pages/admin_edit.php");
+  request.setRequestHeader(
+    "Content-Type",
+    "application/x-www-form-urlencoded; charset=UTF-8"
+  );
+  request.send(
+    "id=" + 
+    encodeURIComponent(id) +
+    "&decline_reason=" +
+    encodeURIComponent(declineReason) +
+    "&decline=" +
+    encodeURIComponent("true")
+  );
+}
+
 let sendAddQuery = function (obj, page) {
   let request = new XMLHttpRequest();
 
   request.onload = function () {
     for(let i = 0; i < addFormInputs.length-2; i++) {
-      addFormInputs[i].value = " ";
+      addFormInputs[i].value = "";
     }
 
-    console.log(request.response);
     getPage(page);
   }
 
@@ -137,12 +161,12 @@ let sendAddQuery = function (obj, page) {
 editForm.addEventListener('submit', function(evt) {
   evt.preventDefault();
   sendEditQuery(itemId, toEdit, editContent.value, currentPage);
-  editContent.value = " ";
+  editContent.value = "";
   editWrapper.style.visibility = 'hidden';
   editMenu.style.display = 'none';
 });
 
-editForm.addEventListener('reset', function(evt) {
+editForm.addEventListener('reset', function() {
   editWrapper.style.visibility = 'hidden';
   editMenu.style.display = 'none';
 });
@@ -154,9 +178,23 @@ deleteForm.addEventListener('submit', function(evt) {
   deleteMenu.style.display = 'none';
 });
 
-deleteForm.addEventListener('reset', function(evt) {
+deleteForm.addEventListener('reset', function() {
   editWrapper.style.visibility = 'hidden';
   deleteMenu.style.display = 'none';
+})
+
+declineForm.addEventListener('submit', function(evt) {
+  evt.preventDefault(evt);
+  let declineReason = declineForm.querySelector("textarea");
+  sendDeclineQuery(itemId, declineReason.value, 'order');
+  declineForm.value = "";
+  editWrapper.style.visibility = 'hidden';
+  declineOrderMenu.style.display = 'none';
+})
+
+declineForm.addEventListener('reset', function() {
+  editWrapper.style.visibility = 'hidden';
+  declineOrderMenu.style.display = 'none';
 })
 
 productForm.addEventListener('submit', function(evt) {
@@ -177,7 +215,7 @@ productForm.addEventListener('submit', function(evt) {
   addMenu.style.display = 'none';
 });
 
-productForm.addEventListener('reset', function(evt) {
+productForm.addEventListener('reset', function() {
   editWrapper.style.visibility = 'hidden';
   addMenu.style.display = 'none';
 })
@@ -194,7 +232,7 @@ categoryForm.addEventListener('submit', function(evt) {
   addMenu.style.display = 'none';
 });
 
-categoryForm.addEventListener('reset', function(evt) {
+categoryForm.addEventListener('reset', function() {
   editWrapper.style.visibility = 'hidden';
   addMenu.style.display = 'none';
 })
@@ -203,8 +241,8 @@ let formData = {
 
 };
 
-let itemId = '';
-let toEdit = '';
+let itemId;
+let toEdit;
 let addFormInputs;
 
 let setControls = function (page) {
@@ -267,13 +305,17 @@ let setControls = function (page) {
 
   for (let i = 0; i < editButtons.length; i++) {
     editButtons[i].addEventListener("click", function () {
-      itemId = editButtons[i].parentElement.parentElement.dataset.id;
-      toEdit = editButtons[i].parentElement.dataset.section;
+      itemId = editButtons[i].parentElement.parentElement.dataset.id; //Stores id of item which is pressed
+      toEdit = editButtons[i].parentElement.dataset.section; //Stores new information about item
       editWrapper.style.visibility = 'visible';
       if(!editButtons[i].classList.contains('delete-button')) {
         editMenu.style.display = 'block';
       } else {
-        deleteMenu.style.display = 'block';
+        if(currentPage == 'order') { //If at order page, show decline form
+          declineOrderMenu.style.display = 'block';
+        } else {
+          deleteMenu.style.display = 'block';
+        }
       }
       // editContent.value = editButtons[i].textContent; //Current text should appear in edit menu
     });

@@ -19,6 +19,16 @@ if(isset($_POST["delete"])) {
     exit();
 };
 
+if(isset($_POST["decline"])) {
+    $decline_reason = $_POST['decline_reason'];
+
+    $query = "UPDATE `order` SET `status` = 'Отменен', `decline_reason` = '$decline_reason' WHERE `order_id` = $id";
+
+    $result = mysqli_query($link, $query);
+    
+    exit();
+};
+
 if(isset($_POST["add"])) {
     switch($current_page) {
         case "product":

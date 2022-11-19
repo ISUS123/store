@@ -5,7 +5,7 @@ $page = $_POST['page'];
 
 switch ($page) {
     case 'order':
-        $query = "SELECT `order`.`order_id`,  `order`.`product_id`, `product`.`name`, `order`.`date`, `order`.`qnt`, `order`.`cost`, `order`.`status` FROM `order` INNER JOIN product ON `order`.product_id = product.product_id";
+        $query = "SELECT `order`.`order_id`,  `order`.`product_id`, `product`.`name`, `order`.`date`, `order`.`qnt`, `order`.`cost`, `order`.`status`, `order`.`decline_reason` FROM `order` INNER JOIN product ON `order`.product_id = product.product_id";
 
         $result = mysqli_query($link, $query);
         if (mysqli_num_rows($result) > 0) {
@@ -33,6 +33,9 @@ switch ($page) {
         <th>
         Статус
         </th>
+        <th>
+        Причина отмены
+        </th>
         </tr>
         ";
         //Getting items from database
@@ -44,6 +47,7 @@ switch ($page) {
             $qnt = $row['qnt'];
             $cost = $row['cost'];
             $status = $row['status'];
+            $decline_reason = $row['decline_reason'];
 
             //Making item card
             echo "
@@ -55,6 +59,7 @@ switch ($page) {
                 <td data-section='qnt'>$qnt шт.</td>
                 <td data-section='cost'>$cost р.</td>
                 <td data-section='status'>$status</td>
+                <td data-section='decline_reason'>$decline_reason</td>
                 </tr>";
                 
         }

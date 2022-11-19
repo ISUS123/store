@@ -31,6 +31,17 @@
                         </div>
                     </form>
                 </div>
+                <div class="decline-menu menu">
+                    <p class="title">Отмена заказа</p>
+                    <label for='decline_reason'>Введите причину отмены заказа: </label>
+                    <form action="#">
+                        <textarea cols="30" rows="10" required id='decline_reason' name='decline_reason'></textarea>
+                        <div class="edit-buttons">
+                            <input type="reset" value="Отмена">
+                            <input type="submit" value="Подтвердить">
+                        </div>
+                    </form>
+                </div>
                 <div class="add-menu menu">
                     <p class="title">Добавление элемента</p>
                     <form action="#" id='product'>
