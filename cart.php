@@ -15,7 +15,7 @@ if (empty($_SESSION["session_username"])) {
 
 ?>
 
-<content>
+<content class="align-top">
     <div class='cart-page'>
         <div class='container'>
             <div class="cart-menu">

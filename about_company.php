@@ -31,7 +31,7 @@ require_once 'assets/php/connection.php';
                 <div>
                     <p>Компания CopyStar основана Иваном Ивановичем в 2004 году. Компания специализируется на производстве копировального оборудования. Главный офис находится в Москве.</p>
                 </div>
-                <a class="show-quiz">Пройти тест</a>
+                <a class="show-quiz"></a>
             </div>
     
             <div class="slider">
@@ -89,8 +89,6 @@ require_once 'assets/php/connection.php';
             </div>
         </div>
     </div>
-    
-    <div class="background"></div>
 </content>
 
 <?php

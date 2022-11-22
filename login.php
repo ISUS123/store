@@ -11,11 +11,11 @@ require_once('header.php');
                         <div class="standard-form">
                             <div>
                                 <label for="login">Логин: </label>
-                                <input minlength="3" maxlength="20" required type="text" name="login" value="iva21" id="login">
+                                <input minlength="3" maxlength="20" required type="text" name="login" id="login">
                             </div>
                             <div>
                                 <label for="password">Пароль:</label>
-                                <input minlength="3" maxlength="20" required type="password" name="password" value="123" id="password">
+                                <input minlength="3" maxlength="20" required type="password" name="password" id="password">
                             </div>
                             <div class="buttons">
                                 <p class="error-message">Пароли не совпадают</p>

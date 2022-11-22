@@ -11,11 +11,11 @@ require_once('header.php');
                         <div class="standard-form">
                             <div>
                                 <label for="name">Имя: </label>
-                                <input minlength="1" maxlength="32" required type="text" name="name" id="name" value="Ivan">
+                                <input minlength="1" maxlength="32" required type="text" name="name" id="name">
                             </div>
                             <div>
                                 <label for="surname">Фамилия: </label>
-                                <input minlength="1" maxlength="32" required type="text" name="surname" id="surname" value="Ivanov">
+                                <input minlength="1" maxlength="32" required type="text" name="surname" id="surname">
                             </div>
                             <div>
                                 <label for="patronymic">Отчество: </label>
@@ -23,19 +23,19 @@ require_once('header.php');
                             </div>
                             <div>
                                 <label for="login">Логин: </label>
-                                <input minlength="3" maxlength="16" required type="text" name="login" id="login" value="iva21">
+                                <input minlength="3" maxlength="16" required type="text" name="login" id="login">
                             </div>
                             <div>
                                 <label for="email">Email: </label>
-                                <input minlength="3" maxlength="64" required type="email" name="email" id="email" value="i_van@yandex.ru">
+                                <input minlength="3" maxlength="64" required type="email" name="email" id="email">
                             </div>
                             <div>
                                 <label for="password">Пароль:</label>
-                                <input minlength="6" maxlength="32" required type="password" name="password" id="password" value="123">
+                                <input minlength="6" maxlength="32" required type="password" name="password" id="password">
                             </div>
                             <div>
                                 <label for="password_repeat">Повтор пароля:</label>
-                                <input minlength="6" maxlength="32" required type="password" name="password_repeat" id="password_repeat" value="123">
+                                <input minlength="6" maxlength="32" required type="password" name="password_repeat" id="password_repeat">
                             </div>
                             <div class="buttons">
                                 <p class="error-message">Пароли не совпадают</p>

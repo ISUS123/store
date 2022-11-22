@@ -3,7 +3,7 @@ require_once "header.php";
 require_once "assets/php/connection.php";
 ?>
 
-<content>
+<content class="align-top">
     <div class="catalog">
         <div class="container">
             <div class="catalog-menu">

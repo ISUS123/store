@@ -91,7 +91,7 @@ passwordClose.addEventListener("click", function () {
   errorMessage.style.display = "none";
 });
 
-let sendRequest = function (obj) {
+let sendRequest = function (obj, i) {
   let request = new XMLHttpRequest();
 
   request.onload = function () {
@@ -99,8 +99,8 @@ let sendRequest = function (obj) {
     let responseCode = request.responseText.split("=");
     switch (responseCode[0]) {
       case "1": {
-        let cost = document.querySelectorAll(".cost p");
-        cost[i].textContent = "Цена всего: " + responseCode[1] + " р.";
+        let cost = document.querySelectorAll(".cost span");
+        cost[i].textContent = responseCode[1] + " р.";
         break;
       }
       case "2": {
@@ -144,9 +144,6 @@ let updateItemButtons = function () {
 
   let addButtonClickHandler = function (button, i) {
     let formData = {};
-
-    
-
     switch (button.getAttribute("data-name")) {
       case "qnt": {
         button.addEventListener("change", function () {
@@ -155,7 +152,7 @@ let updateItemButtons = function () {
             qnt: button.value,
             product_id: button.getAttribute("data-id"),
           };
-          sendRequest(formData);
+          sendRequest(formData, i);
         });
         break;
       }

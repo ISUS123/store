@@ -106,7 +106,10 @@ form.addEventListener("submit", function (evt) {
 //Slider
 
 let catalogItem = document.querySelectorAll(".catalog-item");
+let width = catalogItem[0].getBoundingClientRect().width;
 let slider = document.querySelector(".slider");
+let sliderContent = document.querySelector(".slider-content");
+let sliderContentWidth = sliderContent.getBoundingClientRect().width;
 
 let checkElementAvailability = function (element) {
   let leftButton = document.querySelector(".left");
@@ -121,11 +124,22 @@ let checkElementAvailability = function (element) {
 
   let sliderLine = document.querySelector(".slider-line");
   let offset = 0;
-  let width = 1044;
 
+  let autoScale = function() {
+    sliderContentWidth = sliderContent.getBoundingClientRect().width;
+    for(let i = 0; i < catalogItem.length; i++) {
+      catalogItem[i].style.minWidth = sliderContentWidth - 20 + "px";
+    }
+    sliderLine.style.left = 0 + "px";
+    offset = 0;
+  }
 
+  window.onload = autoScale;
+  
+  window.onresize = autoScale;
 
   leftButton.addEventListener("click", function () {
+    width = catalogItem[0].getBoundingClientRect().width + 10;
     offset += width;
     if (offset >= width) {
       //if left border reached
@@ -144,6 +158,7 @@ let checkElementAvailability = function (element) {
   };
 
   rightButton.addEventListener("click", function () {
+    width = catalogItem[0].getBoundingClientRect().width + 10;
     offset -= width;
     if (offset <= -width*5) {
       //if right border reached

@@ -57,7 +57,7 @@ if ($page == 'cart' && $is_changing_page) {
                         <input type='number' name='qnt' data-name='qnt' data-id='$product_id' min='1' max='$availableQnt' value='$qnt'>
                     </div>
                     <div class='cost'>
-                        <p>Цена всего: $cost р.</p>
+                        <p>Цена всего: </p> <span>$cost р.</span>
                     </div>
                     <div class='hide' data-name='hide' data-id='$cart_id'>
                         <svg viewBox='0 0 50 50'>
@@ -95,13 +95,13 @@ if ($page == 'cart' && $is_changing_page) {
                         <p class='name'>$name</p>
                     </div>
                     <div class='qnt'>
-                       <p>Количество: $qnt шт.</p>
+                       <p>Количество: </p> <span>$qnt шт.</span>
                     </div>
                     <div class='cost'>
-                        <p>Сумма заказа: $cost р.</p>
+                        <p>Сумма заказа: </p> <span>$cost р.</span>
                     </div>
                     <div class='date'>
-                        <p>Дата заказа: $date</p>
+                        <p>Дата заказа: </p> <span>$date</span>
                     </div>
                 </div>";
         }
@@ -153,7 +153,7 @@ if ($type == 3) { //Proceed item from cart to order
     $product_price = $result_product[0];
     $cost = $product_price * $qnt;
 
-    $query_order = "INSERT INTO `order` VALUES(NULL, $product_id, $customer_id, $cost, $qnt, curdate(), 'Новый')";
+    $query_order = "INSERT INTO `order` VALUES(NULL, $product_id, $customer_id, $cost, $qnt, curdate(), 'Новый', '')";
     $result_order = mysqli_query($link, $query_order);
 
     if ($result_order) {
@@ -167,7 +167,7 @@ if ($type == 3) { //Proceed item from cart to order
 
 if ($type == 4) { //Password check
     $password = $_POST['password'];
-    $query_password = "SELECT `customer_id` FROM customer WHERE `password` = $password";
+    $query_password = "SELECT `customer_id` FROM customer WHERE `password` = '$password'";
     $result_password = mysqli_query($link, $query_password);
 
     if(mysqli_num_rows($result_password) > 0) {
