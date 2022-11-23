@@ -62,6 +62,14 @@ let showError = function (text) {
   error.style.display = "flex";
 };
 
+error.addEventListener("click", function () {
+  error.style.animation = "hide 0.3s ease";
+  setTimeout(function() {
+    error.style.display = "none";
+  }, 290);
+  
+});
+
 let addButtonClickHandler = function (button) {
   button.addEventListener("click", function () {
     var formData = {
@@ -114,10 +122,4 @@ for (let i = 0; i < buttons.length; i++) {
   addButtonClickHandler(buttons[i]);
 }
 
-errorWindow.addEventListener("click", function () {
-  error.style.animation = "hide 0.3s ease";
-  setTimeout(function() {
-    error.style.display = "none";
-  }, 290);
-  
-});
+

@@ -37,5 +37,10 @@
         }
         ?>
 
+        <button class="nav-trigger">
+            <span></span>
+        </button>
+
     </div>
+    <script src="assets/js/header.js"></script>
 </header>

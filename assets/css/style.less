@@ -103,7 +103,7 @@ select:last-child {
 }
 
 .error-wrapper {
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
   width: 100%;
@@ -113,6 +113,7 @@ select:last-child {
   display: none;
   justify-content: center;
   align-items: center;
+  cursor: pointer;
 }
 
 .error {
@@ -126,7 +127,6 @@ select:last-child {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  cursor: pointer;
 }
 
 .error .enter {
@@ -297,7 +297,6 @@ header {
     0 2px 2px 0 rgba(@shadow-color, 0.12), 0 1px 3px 0 rgba(@shadow-color, 0.2);
   margin-bottom: 20px;
   background-color: @background-color;
-  // min-width: 100%;
 }
 
 header {
@@ -309,17 +308,17 @@ header {
 
   .menus {
     white-space: nowrap;
+    margin-left: 75px;
   }
 
   a {
     padding: 5px;
-    margin-right: 25px;
     font-size: 18px;
+    user-select: none;
   }
 
   .button-about {
     position: relative;
-    margin-left: 70px;
   }
 
   .button-about img {
@@ -344,16 +343,6 @@ header {
     width: 70px;
   }
 
-  .auth-buttons {
-    display: flex;
-    justify-content: space-between;
-    margin-left: 20px;
-  }
-
-  .auth {
-    margin-right: 50px;
-  }
-
   .auth:last-child {
     margin-right: 0;
   }
@@ -363,6 +352,7 @@ header {
   }
 
   .button-register {
+    margin-left: 30px;
     position: relative;
   }
 
@@ -388,7 +378,6 @@ header {
 
   .button-cart {
     position: relative;
-    margin-right: 40px;
   }
 
   .button-cart::before {
@@ -402,6 +391,154 @@ header {
   .button-login::before {
     .insert-svg("../img/login_FILL0_wght400_GRAD0_opsz48.svg");
   }
+
+  .nav-trigger {
+    display: none;
+  }
+}
+
+@media (max-width: 768px) {
+  header {
+    height: 35px;
+    overflow: hidden;
+    position: relative;
+    background-color: white;
+    z-index: 1;
+    box-shadow: 0 2px 4px 0 rgba(99, 79, 116, 0.14), 0 3px 4px 0 rgba(99, 79, 116, 0.12), 0 1px 5px 0 rgba(99, 79, 116, 0.2);
+    transition: height .3s ease;
+  }
+
+  header.unfolded {
+    height: 175px;
+  }
+
+  header .auth-buttons,
+  header .menus {
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity .3s;
+  }
+
+  header.unfolded .auth-buttons,
+  header.unfolded .menus {
+    pointer-events: all;
+    opacity: 1;
+  }
+
+  header .container {
+    flex-direction: column;
+  }
+
+  header .container::before {
+    content: "";
+    position: absolute;
+    top: 5px;
+    left: 0;
+    width: 70px;
+    height: 70px;
+    background-size: cover;
+    background-image: url(../img/logo.png);
+  }
+
+  header .container > div {
+    width: 200px;
+    margin-left: 75px;
+  }
+
+  header .button-register {
+    margin-left: 0;
+  }
+  
+  header .button-login::before {
+    content: unset;
+  }
+
+  header .button-register::before {
+    content: unset;
+  }
+
+  header .auth:hover {
+    border-bottom: 0;
+  }
+
+  header .menus .button-about img {
+    display: none;
+  }
+
+  header a {
+    display: block;
+    background-color: white;
+  }
+
+  header a:hover {
+    background-color: #e5e5e5;
+  }
+
+  header .nav-trigger {
+    position: absolute;
+    right: 25px;
+    top: 25px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+    border: 0;
+    background: 0 0;
+    width: 30px;
+    height: 30px;
+    padding: 0;
+    cursor: pointer;
+  }
+
+  .nav-trigger>span {
+    position: relative;
+    display: inline-block;
+    width: inherit;
+    height: 3px;
+    background-color: #bdbdbd;
+    vertical-align: middle;
+    text-align: center;
+    border-radius: 10px;
+    transition: background-color .2s .2s;
+  }
+
+  .nav-trigger>span::after,
+  .nav-trigger>span::before {
+    content: "";
+    display: inline-block;
+    left: 0;
+    position: absolute;
+    width: inherit;
+    height: 3px;
+    background-color: #bdbdbd;
+    border-radius: 10px;
+    transition: transform .2s .0s, top .2s .2s;
+  }
+
+  .nav-trigger>span::after {
+    top: -10px;
+  }
+
+  .nav-trigger>span::before {
+    top: 10px;
+  }
+
+  header.unfolded span {
+    transition: background-color .2s .1s;
+    background-color: transparent;
+  }
+
+  header.unfolded span::after {
+    transition: transform .2s .2s, top .2s .0s;
+    top: 0;
+    transform: rotate(45deg);
+  }
+
+  header.unfolded span::before {
+    transition: transform .2s .2s, top .2s .0s;
+    top: 0;
+    transform: rotate(-45deg);
+  }
 }
 
 /************************
@@ -411,7 +548,9 @@ Auth/register form styles
 .auth-box {
   animation: reveal 0.5s ease;
   border-radius: 5px;
-  width: 450px;
+  width: 80%;
+  min-width: 315px;
+  max-width: 450px;
   box-shadow: 0 4px 5px 0 rgba(@shadow-color, 0.14),
     0 1px 10px 0 rgba(@shadow-color, 0.12), 0 2px 4px 0 rgba(@shadow-color, 0.2);
   padding-bottom: 10px;
@@ -509,6 +648,15 @@ Catalog Styles
     white-space: nowrap;
   }
 
+  .item-picture a {
+    border: 0;
+    box-shadow: none;
+    position: unset;
+    border-radius: 0;
+    background-color: transparent;
+    padding: 0;
+  }
+
   .catalog-item .cart {
     width: 25px;
     height: 25px;
@@ -544,7 +692,7 @@ Catalog Styles
   }
 
   .button {
-    transition: all 0.2s ease;
+    transition: background-color 0.2s ease;
     border-radius: 5px;
     margin-top: 10px;
     padding: 10px;
@@ -553,12 +701,12 @@ Catalog Styles
   }
 
   .button:hover {
-    transition: all 0.2s ease;
+    transition: background-color 0.2s ease;
     background-color: #eeeeee;
   }
 
   .button:active {
-    transition: all 0.1s ease;
+    transition: box-shadow, background-color 0.1s ease;
     box-shadow: inset 0 0 2px 0 rgba(0, 0, 0, 0.5);
     background-color: #e5e5e5;
   }
@@ -619,7 +767,6 @@ Catalog Styles
     }
 
     .item-name span:first-child {
-      // width: 200px;
       margin-right: 5px;
       white-space: nowrap;
       overflow: hidden;
@@ -647,6 +794,156 @@ Catalog Styles
       object-fit: contain;
     }
   }
+
+  @media (max-width: 944px) {
+    .container {
+      flex-direction: column;
+    }
+    
+    .catalog-menu {
+      width: auto;
+      height: auto;
+      position: relative;
+      padding-top: 30px;
+      margin-bottom: 10px;
+      min-width: auto;
+      min-height: auto;
+      max-width: none;
+      max-height: none;
+    }
+
+    .catalog-menu form {
+      display: flex;
+      width: auto;
+      gap: 10px;
+    }
+
+    .catalog-menu p {
+      position: absolute;
+      top: 0;
+      left: 10px;
+    }
+
+    .catalog-menu p::after {
+      content: " и выбор категории";
+    }
+
+    .catalog-menu form p {
+      display: none;
+    }
+
+    .catalog-menu select {
+      display: block;
+      width: auto;
+      max-height: 50px;
+      margin-bottom: 0;
+    }
+
+
+    .catalog-menu form .button {
+      display: block;
+      width: 200px;
+      height: 50px;
+      margin-left: auto;
+      margin-top: 0;
+    }
+    
+    .catalog-item {
+      display: flex;
+      width: auto;
+      height: auto;
+      justify-content: space-between;
+      margin-left: 0;
+    }
+
+    .catalog-item .item-content {
+      position: relative;
+      flex-direction: row;
+      width: 100%;
+      min-height: 100px;
+    }
+
+    .catalog-item .item-picture {
+      display: flex;
+      justify-content: center;
+      min-height: auto;
+      width: 100px;
+      height: 100px;
+      flex-basis: 20%;
+      order: -1;
+    }
+
+    .catalog-item img {
+      width: 120px;
+    }
+
+    .catalog-item .item-name {
+      position: absolute;
+      right: 0;
+      top: 0;
+    }
+
+    .catalog-item .item-name > span:first-child {
+      margin-left: auto;
+    }
+
+    .catalog-item .item-bottom {
+      justify-content: flex-end;
+      gap: 10px;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .catalog-menu {
+      padding: 10px;
+    }
+
+    .catalog-menu p {
+      position: unset;
+    }
+
+    .catalog-menu form {
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .catalog-menu form .button {
+      width: 100%;
+    }
+
+    .catalog-item .item-content {
+      flex-direction: column;
+    }
+
+    .catalog-item .item-name {
+      width: 100%;
+      justify-content: space-between;
+    }
+
+    .catalog-item .item-name span:first-child {
+      margin-left: 0;
+    }
+
+    .catalog-item .item-bottom {
+      position: absolute;
+      right: 0;
+      bottom: 0;
+      justify-content: space-between;
+    }
+
+    .catalog-item .item-name {
+      order: -1;
+      position: unset;
+    }
+
+    .catalog-item .item-page {
+      display: none;
+    }
+
+    .catalog-item .item-picture {
+      width: 120px; 
+    }
+  }
 }
 
 /*******************
@@ -655,7 +952,6 @@ Location page Styles
 
 .location-page {
   animation: reveal 0.5s ease;
-  width: 100%;
 
   .map {
     box-shadow: 0 4px 5px 0 rgba(@shadow-color, 0.14),
@@ -664,21 +960,22 @@ Location page Styles
     border-radius: 5px;
     // background: url("../img/map.PNG");
     // width: 100%;
-    min-width: 650px;
     // height: auto;
     // min-height: auto;
     // background-size: cover;
     // background-repeat: no-repeat;
+    
   }
 
-  .map > img {
+  .map img {
     width: 100%;
+    height: 100%;
+    object-fit: fill;
   }
 
   .contacts {
     display: flex;
     justify-content: space-between;
-    min-width: 650px;
   }
 
   .contacts p,
@@ -694,10 +991,10 @@ Location page Styles
       0 1px 5px 0 rgba(@shadow-color, 0.2);
     border-radius: 5px;
     padding: 5px;
+    box-sizing: border-box;
     margin-top: 10px;
     width: 100%;
     margin-left: 10px;
-    height: 60px;
     background-color: @background-color;
   }
 
@@ -707,6 +1004,18 @@ Location page Styles
 
   .contacts > div:first-child {
     margin-left: 0;
+  }
+}
+
+@media (max-width: 768px) {
+  .location-page .contacts {
+    flex-direction: column;
+  }
+
+  .location-page .contacts div {
+    margin: 0;
+    margin-top: 10px;
+    width: 100%;
   }
 }
 
@@ -811,7 +1120,6 @@ About page Styles
 
 .about-page {
   animation: reveal 0.5s ease;
-  min-width: 650px;
   .about {
     box-shadow: 0 4px 5px 0 rgba(@shadow-color, 0.14),
       0 1px 10px 0 rgba(@shadow-color, 0.12),
@@ -822,7 +1130,7 @@ About page Styles
     background-color: @background-color;
   }
 
-  img {
+  .about img {
     width: 20%;
     min-width: 100px;
     max-width: 250px;
@@ -866,6 +1174,7 @@ About page Styles
     padding-bottom: 30px;
     display: flex;
     justify-content: space-between;
+    position: relative;
   }
 
   .slider-content > p {
@@ -992,21 +1301,16 @@ About page Styles
     display: flex;
     justify-content: space-between;
     img {
-      width: 400px;
-      margin-left: 20px;
+      width: 100%;
     }
 
     .item-left {
       min-width: 230px;
+      margin-right: 10px;
     }
 
     .item-left p {
       word-break: break-word;
-    }
-
-    .item-right img {
-      width: 90%;
-      max-width: 400px;
     }
 
     a {
@@ -1035,6 +1339,61 @@ About page Styles
   }
 }
 
+@media (max-width: 768px) {
+  .slider .catalog-item {
+    flex-direction: column;
+    justify-content: space-between;
+    cursor: pointer;
+  }
+
+  .slider .catalog-item .item-right {
+    width: 40%;
+    align-self: center;
+  }
+
+  .slider .catalog-item .item-left {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .slider .catalog-item .item-left a {
+    display: none;
+  }
+
+  .slider .catalog-item .item-left span:last-child::before {
+    content: "Цена: ";
+  }
+
+  .slider .catalog-item .item-left span:last-child {
+    align-self: flex-end;
+  }
+
+  .slider .slider-arrow {
+    position: absolute;
+    top: 70px;
+    z-index: 2;
+    height: 400px;
+    cursor: pointer;
+  }
+
+  .slider .slider-arrow > svg {
+    display: none;
+  }
+
+  .slider .slider-arrow.left {
+    background: linear-gradient(to right, white 30%, transparent);
+    left: 0;
+  }
+
+  .slider .slider-arrow.right {
+    background: linear-gradient(to left, white 30%, transparent);
+    right: 0;
+  }
+}
+
+@media (max-width: 480px) {
+}
+
 /**********************
   Product page Styles
 ***********************/
@@ -1053,26 +1412,30 @@ About page Styles
       0 1px 18px 0 rgba(@shadow-color, 0.12),
       0 3px 5px 0 rgba(@shadow-color, 0.2);
     padding: 20px;
-    width: 500px;
+    width: 65%;
+    min-width: 520px;
     display: flex;
     flex-direction: column;
   }
 
   .product-card img {
-    width: 500px;
+    width: 100%;
   }
 
   .product-card div {
     display: flex;
     justify-content: space-between;
+    flex-wrap: nowrap;
     align-items: center;
+    white-space: nowrap;
+    gap: 10px;
   }
 
   a {
-    transition: all 0.2s ease;
+    transition: background-color 0.2s ease;
     background-color: white;
     padding: 15px;
-    width: 200px;
+    width: 50%;
     text-align: center;
     border: 1px solid #bdbdbd;
     border-radius: 5px;
@@ -1094,12 +1457,40 @@ About page Styles
   }
 }
 
+@media (max-width: 768px) {
+  .product .product-card {
+    width: 90%;
+    min-width: unset;
+  }
+
+  .product .product-card div {
+    flex-wrap: wrap;
+  }
+
+  .product a {
+    width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .product .product-card {
+    width: 90%;
+  }
+
+  .product .product-card div {
+    flex-wrap: wrap;
+  }
+
+  .product a {
+    width: 100%;
+  }
+}
+
 /*****************
 Cart page Styles
 ******************/
 
 .cart-page {
-  min-width: 650px;
   .cart-item {
     background-color: @background-color;
     border-radius: 5px;
@@ -1353,7 +1744,7 @@ section {
 }
 
 /*****************
-Footer Styles
+ Styles
 ******************/
 
 footer {

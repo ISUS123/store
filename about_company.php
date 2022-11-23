@@ -57,7 +57,7 @@ require_once 'assets/php/connection.php';
                                     $img_url = $row['img_url'];
     
                                     //Making item card
-                                    echo "<div class='catalog-item'>
+                                    echo "<div class='catalog-item' data-id='$product_id'>
                             <div class='item-left'>
                                 <span>$name</span>
                                 <p>$description</p>

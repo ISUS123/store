@@ -135,6 +135,8 @@ let checkElementAvailability = function (element) {
   }
 
   window.onload = autoScale;
+
+  setTimeout(function() {autoScale();}, 500);
   
   window.onresize = autoScale;
 
@@ -168,6 +170,17 @@ let checkElementAvailability = function (element) {
     }
     sliderLine.style.left = offset + "px";
   });
+
+  for(let i = 0; i < catalogItem.length; i++) {
+    catalogItem[i].addEventListener('click', function() {
+      let sliderWidth = slider.getBoundingClientRect().width;
+      if(sliderWidth <= 677) {
+        let itemId = catalogItem[i].dataset.id;
+        window.location.href = "product?product_id=" + itemId;
+      }
+    })
+  }
 };
+
 
 checkElementAvailability(catalogItem);

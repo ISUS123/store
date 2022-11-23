@@ -6,7 +6,7 @@ require_once 'header.php';
     <div class="location-page">
         <div class="container">
             <div class="map">
-                <img src="assets/img/map.PNG">
+                <a href="assets/img/map.PNG"><img src="assets/img/map.PNG"></a>
             </div>
     
             <div class="contacts">
