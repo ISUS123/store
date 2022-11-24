@@ -44,7 +44,7 @@ $result = mysqli_query($link, $query_insert) or die("Ошибка отправк
 } else {
 
 //If this item already in the cart
-if($qnt < $qnt_available + 1) { //If qnt adding in the cart < qnt available
+if($qnt < $qnt_available) { //If qnt adding in the cart < qnt available
     $query_insert = "UPDATE cart SET qnt = $qnt+1 WHERE cart_id = $cart_id";
     $result = mysqli_query($link, $query_insert) or die("Ошибка отправки запроса " . mysqli_error($link));
         if($result) {

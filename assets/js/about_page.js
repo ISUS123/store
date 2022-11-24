@@ -172,13 +172,23 @@ let checkElementAvailability = function (element) {
     catalogItem[4].classList.remove("shake-right");
   };
 
+  function isTouchEnabled() {
+    return ( 'ontouchstart' in window ) ||
+    ( navigator.maxTouchPoints > 0 ) ||
+    ( navigator.msMaxTouchPoints > 0 );
+    }
+
   let posX1;
   let posX2;
   let posInit;
   let posFinal;
 
   let swipeStart = function(evt) {
+    if (isTouchEnabled()) {
+      posInit = posX1 = evt.touches[0].clientX;
+  } else {
     posInit = posX1 = evt.clientX;
+  }
 
     document.addEventListener('touchmove', swipeAction);
     document.addEventListener('touchend', swipeEnd);
@@ -187,8 +197,14 @@ let checkElementAvailability = function (element) {
   }
 
   let swipeAction = function(evt) {
-    posX2 = posX1 - evt.clientX;
-    posX1 = evt.clientX;
+    if(isTouchEnabled()) {
+      posX2 = posX1 - evt.touches[0].clientX;
+      posX1 = evt.touches[0].clientX;
+    } else {
+      posX2 = posX1 - evt.clientX;
+      posX1 = evt.clientX;
+    }
+    
 
     for(let i = 0; i < catalogItem.length; i++) {
       catalogItem[i].style.pointerEvents = "none";
@@ -222,8 +238,12 @@ let checkElementAvailability = function (element) {
   leftButton.onclick = moveLeft;
   rightButton.onclick = moveRight;
 
+
   sliderContent.onmousedown = swipeStart;
   sliderContent.onmouseup = swipeEnd;
+
+  sliderContent.addEventListener('touchstart', swipeStart);
+  sliderContent.addEventListener('touchend', swipeEnd);
 
 
   for(let i = 0; i < catalogItem.length; i++) {

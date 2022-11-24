@@ -1250,7 +1250,7 @@ About page Styles
     }
 
     20% {
-      margin-left: 25px;
+      margin-left: 15px;
     }
 
     40% {
@@ -1258,7 +1258,7 @@ About page Styles
     }
 
     70% {
-      margin-left: 30px;
+      margin-left: 20px;
     }
 
     to {
@@ -1826,6 +1826,37 @@ footer {
     font-size: 12px;
     margin-bottom: 0;
    }
+}
+
+@media (max-width: 480px) {
+  footer .navmenu {
+    flex-wrap: nowrap;
+    flex-direction: column;
+    gap: 5px;
+    font-size: 16px;
+  }
+
+  footer .navmenu-title {
+    font-size: 16px;
+  }
+
+  footer .navmenu-link {
+    padding: 10px;
+    padding-left: 0;
+  }
+
+  footer .navmenu-link a {
+    padding: 10px;
+    padding-left: 0;
+  }
+
+  footer .copyright p {
+    font-size: 14px;
+  }
+
+  footer .navmenu-link a:hover {
+    background-color: #e5e5e5;
+  }
 }
 
 /*****************
