@@ -106,24 +106,26 @@ form.addEventListener("submit", function (evt) {
 //Slider
 
 let catalogItem = document.querySelectorAll(".catalog-item");
-let width = catalogItem[0].getBoundingClientRect().width;
-let slider = document.querySelector(".slider");
-let sliderContent = document.querySelector(".slider-content");
-let sliderContentWidth = sliderContent.getBoundingClientRect().width;
 
 let checkElementAvailability = function (element) {
-  let leftButton = document.querySelector(".left");
-  let rightButton = document.querySelector(".right");
   if (element.length < 5) {
     //If error, hide slider or show error message
     slider.style.display = "none";
-    // leftButton.style.display = "none";
-    // rightButton.style.display = "none";
     return;
   }
 
+  let slider = document.querySelector(".slider");
+  let sliderContent = document.querySelector(".slider-content");
+  let sliderContentWidth = sliderContent.getBoundingClientRect().width;
+
+  let leftButton = document.querySelector(".left");
+  let rightButton = document.querySelector(".right");
+
   let sliderLine = document.querySelector(".slider-line");
+  let width = catalogItem[0].getBoundingClientRect().width;
   let offset = 0;
+
+  let posThreshold;
 
   let autoScale = function() {
     sliderContentWidth = sliderContent.getBoundingClientRect().width;
@@ -132,15 +134,14 @@ let checkElementAvailability = function (element) {
     }
     sliderLine.style.left = 0 + "px";
     offset = 0;
+    posThreshold = sliderContentWidth * .1;
   }
 
   window.onload = autoScale;
-
+  window.onresize = autoScale;
   setTimeout(function() {autoScale();}, 500);
   
-  window.onresize = autoScale;
-
-  leftButton.addEventListener("click", function () {
+  let moveLeft = function () {
     width = catalogItem[0].getBoundingClientRect().width + 10;
     offset += width;
     if (offset >= width) {
@@ -150,16 +151,9 @@ let checkElementAvailability = function (element) {
       catalogItem[0].addEventListener("animationend", animationEndCallback);
     }
     sliderLine.style.left = offset + "px";
-  });
-
-  animationEndCallback = function () {
-    catalogItem[0].removeEventListener("animationend", animationEndCallback);
-    catalogItem[0].classList.remove("shake-left");
-    catalogItem[4].removeEventListener("animationend", animationEndCallback);
-    catalogItem[4].classList.remove("shake-right");
   };
 
-  rightButton.addEventListener("click", function () {
+  let moveRight = function () {
     width = catalogItem[0].getBoundingClientRect().width + 10;
     offset -= width;
     if (offset <= -width*5) {
@@ -169,7 +163,68 @@ let checkElementAvailability = function (element) {
       catalogItem[4].addEventListener("animationend", animationEndCallback);
     }
     sliderLine.style.left = offset + "px";
-  });
+  };
+
+  animationEndCallback = function () {
+    catalogItem[0].removeEventListener("animationend", animationEndCallback);
+    catalogItem[0].classList.remove("shake-left");
+    catalogItem[4].removeEventListener("animationend", animationEndCallback);
+    catalogItem[4].classList.remove("shake-right");
+  };
+
+  let posX1;
+  let posX2;
+  let posInit;
+  let posFinal;
+
+  let swipeStart = function(evt) {
+    posInit = posX1 = evt.clientX;
+
+    document.addEventListener('touchmove', swipeAction);
+    document.addEventListener('touchend', swipeEnd);
+    document.addEventListener('mousemove', swipeAction);
+    document.addEventListener('mouseup', swipeEnd);
+  }
+
+  let swipeAction = function(evt) {
+    posX2 = posX1 - evt.clientX;
+    posX1 = evt.clientX;
+
+    for(let i = 0; i < catalogItem.length; i++) {
+      catalogItem[i].style.pointerEvents = "none";
+    }
+  }
+
+  let swipeEnd = function() {
+    posFinal = posInit - posX1;
+
+    document.removeEventListener('touchmove', swipeAction);
+    document.removeEventListener('mousemove', swipeAction);
+    document.removeEventListener('touchend', swipeEnd);
+    document.removeEventListener('mouseup', swipeEnd);
+
+    for(let i = 0; i < catalogItem.length; i++) {
+      catalogItem[i].style.pointerEvents = "";
+    }
+    
+     // убираем знак минус и сравниваем с порогом сдвига слайда
+  if (Math.abs(posFinal) > posThreshold) {
+    // если мы тянули вправо, то уменьшаем номер текущего слайда
+    if (posInit < posX1) {
+      moveLeft();
+    // если мы тянули влево, то увеличиваем номер текущего слайда
+    } else if (posInit > posX1) {
+      moveRight();
+    }
+  }
+  }
+
+  leftButton.onclick = moveLeft;
+  rightButton.onclick = moveRight;
+
+  sliderContent.onmousedown = swipeStart;
+  sliderContent.onmouseup = swipeEnd;
+
 
   for(let i = 0; i < catalogItem.length; i++) {
     catalogItem[i].addEventListener('click', function() {

@@ -246,6 +246,13 @@ select:last-child {
   }
 }
 
+@media (max-width: 944px) {
+  .hint {
+    right: 0;
+    width: auto;
+  }
+}
+
 
 .standard-form {
   div {
@@ -366,6 +373,11 @@ header {
     color: #464646;
   }
 
+  .auth-buttons {
+    display: flex;
+    gap: 30px;
+  }
+
   .auth {
     transition: border 0.1s linear;
     border-bottom: 0 solid;
@@ -412,6 +424,11 @@ header {
     height: 175px;
   }
 
+  header .auth-buttons {
+    flex-direction: column;
+    gap: 0;
+  }
+
   header .auth-buttons,
   header .menus {
     pointer-events: none;
@@ -433,7 +450,7 @@ header {
     content: "";
     position: absolute;
     top: 5px;
-    left: 0;
+    left: 15px;
     width: 70px;
     height: 70px;
     background-size: cover;
@@ -454,6 +471,10 @@ header {
   }
 
   header .button-register::before {
+    content: unset;
+  }
+
+  header .button-cart::before {
     content: unset;
   }
 
@@ -869,7 +890,7 @@ Catalog Styles
       min-height: auto;
       width: 100px;
       height: 100px;
-      flex-basis: 20%;
+      margin-left: 10px;
       order: -1;
     }
 
@@ -893,7 +914,7 @@ Catalog Styles
     }
   }
 
-  @media (max-width: 480px) {
+  @media (max-width: 600px) {
     .catalog-menu {
       padding: 10px;
     }
@@ -1300,8 +1321,13 @@ About page Styles
     height: 400px;
     display: flex;
     justify-content: space-between;
+    user-select: none;
     img {
       width: 100%;
+    }
+
+    .item-right {
+      max-width: 400px;
     }
 
     .item-left {
@@ -1369,25 +1395,11 @@ About page Styles
   }
 
   .slider .slider-arrow {
-    position: absolute;
-    top: 70px;
-    z-index: 2;
-    height: 400px;
-    cursor: pointer;
+    display: none;
   }
 
   .slider .slider-arrow > svg {
     display: none;
-  }
-
-  .slider .slider-arrow.left {
-    background: linear-gradient(to right, white 30%, transparent);
-    left: 0;
-  }
-
-  .slider .slider-arrow.right {
-    background: linear-gradient(to left, white 30%, transparent);
-    right: 0;
   }
 }
 
@@ -1443,7 +1455,7 @@ About page Styles
     box-shadow: inset 0 0 1px 0 rgba(0, 0, 0, 0.5);
     position: relative;
     font-size: 15px;
-    white-space: wrap;
+    white-space: break-spaces;
   }
 
   a:hover {
@@ -1503,7 +1515,6 @@ Cart page Styles
     min-height: 25px;
     padding: 5px;
     padding-left: 10px;
-    // padding-right: 10px;
     margin-top: 10px;
   }
 
@@ -1651,6 +1662,32 @@ Cart page Styles
       transform: translateX(1100px);
       opacity: 0;
     }
+  }
+}
+
+@media (max-width: 768px) {
+  .cart-page .cart-content .cart-item {
+    flex-wrap: wrap;
+    position: relative;
+    min-height: 150px;
+    padding-right: 10px;
+  }
+
+  .cart-page .cart-item .accept {
+    width: 100%;
+    justify-content: flex-end;
+  }
+
+  .cart-page .cart-item .accept > input {
+    width: 85%;
+  }
+
+  .cart-page .cart-item .hide {
+    position: absolute;
+    left: 5%;
+    right: unset;
+    top: unset;
+    bottom: 5px;
   }
 }
 

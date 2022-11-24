@@ -19,7 +19,6 @@
             </a>
             <a href="catalog" class="menu-button">Каталог</a>
             <a href="location" class="menu-button">Где нас найти?</a>
-            <!-- <a href="admin" class="menu-button">Админ-панель</a> -->
         </div>
 
         <?php
