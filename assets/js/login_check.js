@@ -22,7 +22,7 @@ form.addEventListener("submit", function (evt) {
           errorMessage.textContent = "Неверный пароль"
           errorMessage.classList.add("show");
         } else if (request.responseText == '3') { //Login successful
-          document.location.href = 'cart.php';
+          document.location.href = 'cart';
           errorMessage.classList.remove("show");
         }
       });

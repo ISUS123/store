@@ -145,13 +145,23 @@ let updateItemButtons = function () {
   let addButtonClickHandler = function (button, i) {
     let formData = {};
     switch (button.getAttribute("data-name")) {
+
       case "qnt": {
+
         button.addEventListener("change", function () {
+
+          if(parseInt(button.value) > parseInt(button.max)) {
+            button.value = button.max;
+          } else if (parseInt(button.value) < parseInt(button.min)) {
+            button.value = 1;
+          }
+
           let formData = {
             type: 1,
             qnt: button.value,
             product_id: button.getAttribute("data-id"),
           };
+          
           sendRequest(formData, i);
         });
         break;

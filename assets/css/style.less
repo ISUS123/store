@@ -127,6 +127,8 @@ select:last-child {
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  width: 80%;
+  max-width: 550px;
 }
 
 .error .enter {
@@ -144,6 +146,7 @@ select:last-child {
 }
 
 .hint {
+  box-sizing: border-box;
   background-color: white;
   box-shadow: 0 2px 4px 0 rgba(@shadow-color, 0.14),
     0 3px 4px 0 rgba(@shadow-color, 0.12), 0 1px 5px 0 rgba(@shadow-color, 0.2);
@@ -154,8 +157,8 @@ select:last-child {
   color: #808080;
   visibility: hidden;
   opacity: 0;
-  width: 270px;
   min-height: 26px;
+  white-space: break-spaces;
 }
 
 .hide {
@@ -250,6 +253,12 @@ select:last-child {
   .hint {
     right: 0;
     width: auto;
+  }
+}
+
+@media (max-width: 480px) {
+  .container {
+    min-width: 320px;
   }
 }
 
@@ -430,31 +439,20 @@ header {
   }
 
   header .auth-buttons,
-  header .menus {
+  header .menu-button {
     pointer-events: none;
     opacity: 0;
     transition: opacity .3s;
   }
 
   header.unfolded .auth-buttons,
-  header.unfolded .menus {
+  header.unfolded .menu-button {
     pointer-events: all;
     opacity: 1;
   }
 
   header .container {
     flex-direction: column;
-  }
-
-  header .container::before {
-    content: "";
-    position: absolute;
-    top: 5px;
-    left: 15px;
-    width: 70px;
-    height: 70px;
-    background-size: cover;
-    background-image: url(../img/logo.png);
   }
 
   header .container > div {
@@ -482,8 +480,28 @@ header {
     border-bottom: 0;
   }
 
+  header .menus .button-about {
+    transition: color .3s ease;
+    opacity: 1;
+    color: transparent;
+  }
+
+  header .button-about:hover {
+    background-color: transparent;
+  }
+
+  header.unfolded .button-about {
+    transition: color .3s ease;
+    color: gray;
+  }
+
+  header.unfolded .button-about:hover {
+    background-color: #e5e5e5;
+  }
+
   header .menus .button-about img {
-    display: none;
+    opacity: 1;
+    pointer-events: all;
   }
 
   header a {
@@ -569,7 +587,6 @@ Auth/register form styles
 .auth-box {
   animation: reveal 0.5s ease;
   border-radius: 5px;
-  width: 80%;
   min-width: 315px;
   max-width: 450px;
   box-shadow: 0 4px 5px 0 rgba(@shadow-color, 0.14),
@@ -761,7 +778,9 @@ Catalog Styles
     border-radius: 5px;
     margin-left: 10px;
     margin-bottom: 10px;
-    width: 300px;
+    width: 30%;
+    min-width: 200px;
+    max-width: 300px;
     height: 300px;
     padding: 10px;
     box-shadow: 0 2px 4px 0 rgba(@shadow-color, 0.14),
@@ -801,22 +820,26 @@ Catalog Styles
     .item-picture {
       display: flex;
       justify-content: center;
+      align-items: center;
       min-height: 170px;
     }
 
     .item-bottom {
       margin-top: 2px;
+      gap: 5px;
       display: flex;
+      flex-wrap: wrap;
       justify-content: space-between;
       align-items: flex-end;
     }
     img {
-      width: 200px;
+      width: 100%;
+      max-width: 250px;
       object-fit: contain;
     }
   }
 
-  @media (max-width: 944px) {
+  @media (max-width: 956px) {
     .container {
       flex-direction: column;
     }
@@ -875,6 +898,8 @@ Catalog Styles
       height: auto;
       justify-content: space-between;
       margin-left: 0;
+      min-width: unset;
+      max-width: unset;
     }
 
     .catalog-item .item-content {
@@ -963,6 +988,11 @@ Catalog Styles
 
     .catalog-item .item-picture {
       width: 120px; 
+    }
+
+    .hint {
+      max-height: 100px;
+      min-width: 200px; 
     }
   }
 }
@@ -1324,6 +1354,7 @@ About page Styles
     user-select: none;
     img {
       width: 100%;
+      pointer-events: none;
     }
 
     .item-right {
@@ -1806,7 +1837,7 @@ footer {
 
    a:hover {
     transition: color .3s ease;
-    color: black;
+    color: #464646;
    }
 
    h6 {
@@ -1840,12 +1871,8 @@ footer {
     font-size: 16px;
   }
 
-  footer .navmenu-link {
-    padding: 10px;
-    padding-left: 0;
-  }
-
   footer .navmenu-link a {
+    display: block;
     padding: 10px;
     padding-left: 0;
   }

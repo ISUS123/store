@@ -50,9 +50,12 @@ let addToCartUpdate = function() {
   let errorMessage = errorWindow.querySelector(".error p");
   let enterButton = errorWindow.querySelector(".enter");
   let cart = document.querySelector(".button-cart");
+  let catalogItem = document.querySelector(".catalog-item");
   
   let showHint = function (button, responseCode) { //Shows hint that removes after 1sec
+    let catalogItemWidth = catalogItem.getBoundingClientRect().width;
     let hint = document.createElement("div"); //Making hint element
+    hint.style.maxWidth = catalogItemWidth - 20 + "px";
     hint.classList.add("hint");
     switch (
       responseCode[0] //Changing hint text
@@ -160,7 +163,7 @@ let addToCartUpdate = function() {
     addButtonClickHandler(buttons[i]);
   }
   
-  errorWindow.addEventListener("click", function () {
+  error.addEventListener("click", function () {
     error.style.animation = "hide 0.3s ease";
     setTimeout(function() {
       error.style.display = "none";

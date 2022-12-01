@@ -170,7 +170,25 @@ let checkElementAvailability = function (element) {
     catalogItem[0].classList.remove("shake-left");
     catalogItem[4].removeEventListener("animationend", animationEndCallback);
     catalogItem[4].classList.remove("shake-right");
-  };
+  }
+
+  setTimeout(moveRight(), 3000); //First move to set values into variables
+
+  let interval;
+
+  let autoSlide = function(delay) {
+    interval = setInterval(() => {
+
+      if(offset > -width*4) {
+        moveRight();
+      } else if(offset <= -width*4) {
+        autoScale(); //Setting first slide
+      } 
+
+    }, delay); 
+  }
+
+  setTimeout(autoSlide(3000), 6000);
 
   function isTouchEnabled() {
     return ( 'ontouchstart' in window ) ||
@@ -184,8 +202,11 @@ let checkElementAvailability = function (element) {
   let posFinal;
 
   let swipeStart = function(evt) {
-    if (isTouchEnabled()) {
-      posInit = posX1 = evt.touches[0].clientX;
+    clearInterval(interval); //Cancelling auto slide
+    setTimeout(autoSlide(3000), 6000); //Starting auto slide again after 6 seconds
+
+  if (isTouchEnabled()) { //If device with touchscreen
+    posInit = posX1 = evt.touches[0].clientX; 
   } else {
     posInit = posX1 = evt.clientX;
   }
@@ -204,7 +225,6 @@ let checkElementAvailability = function (element) {
       posX2 = posX1 - evt.clientX;
       posX1 = evt.clientX;
     }
-    
 
     for(let i = 0; i < catalogItem.length; i++) {
       catalogItem[i].style.pointerEvents = "none";
@@ -223,27 +243,36 @@ let checkElementAvailability = function (element) {
       catalogItem[i].style.pointerEvents = "";
     }
     
-     // убираем знак минус и сравниваем с порогом сдвига слайда
+
   if (Math.abs(posFinal) > posThreshold) {
-    // если мы тянули вправо, то уменьшаем номер текущего слайда
+
     if (posInit < posX1) {
       moveLeft();
-    // если мы тянули влево, то увеличиваем номер текущего слайда
+
     } else if (posInit > posX1) {
       moveRight();
     }
   }
+
   }
 
-  leftButton.onclick = moveLeft;
-  rightButton.onclick = moveRight;
+  leftButton.onclick = function() { //Buttons on sides of slider
+    clearInterval(interval);
+    setTimeout(autoSlide(3000), 6000);
+    moveLeft();
+  };
+  rightButton.onclick = function() {
+    clearInterval(interval);
+    setTimeout(autoSlide(3000), 6000);
+    moveRight();
+  };
 
 
   sliderContent.onmousedown = swipeStart;
   sliderContent.onmouseup = swipeEnd;
 
-  sliderContent.addEventListener('touchstart', swipeStart);
-  sliderContent.addEventListener('touchend', swipeEnd);
+  sliderContent.ontouchstart = swipeStart;
+  sliderContent.ontouchend = swipeEnd;
 
 
   for(let i = 0; i < catalogItem.length; i++) {

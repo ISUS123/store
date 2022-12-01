@@ -20,7 +20,7 @@ require_once "assets/php/connection.php";
                     </select>
                     <p>Категория</p>
                     <select name="item_category" size="4">
-                        <option value="all">Все категории</option>
+                        <option value="all" selected>Все категории</option>
                         <option value="laser">Лазерные принтеры</option>
                         <option value="spray">Струйные принтеры</option>
                         <option value="scaner">Сканеры</option>
