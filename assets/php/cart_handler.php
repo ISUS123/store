@@ -153,7 +153,7 @@ if ($type == 3) { //Proceed item from cart to order
     $product_price = $result_product[0];
     $cost = $product_price * $qnt;
 
-    $query_order = "INSERT INTO `order` VALUES(NULL, $product_id, $customer_id, $cost, $qnt, curdate(), 'Новый', '')";
+    $query_order = "INSERT INTO `order` VALUES(NULL, $product_id, $customer_id, $cost, $qnt, curdate(), 'Новый')";
     $result_order = mysqli_query($link, $query_order);
 
     if ($result_order) {
