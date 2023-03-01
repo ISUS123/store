@@ -1,0 +1,10 @@
+<IfModule mod_rewrite.c>
+    RewriteEngine On 
+
+    RewriteBase / 
+    RewriteRule ^catalog$ catalog.php
+    RewriteRule ^services$ services.php
+     
+</IfModule>
+
+DirectoryIndex about_company.php
