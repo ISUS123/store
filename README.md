@@ -1,4 +1,8 @@
 # store
 simple store project without any frameworks for education purposes
 
-Right now site is hosted at http://cp96673.tw1.ru/
+the admin panel is available at /admin 
+login: admin
+password: admin11
+
+works with PHP 7.2 and MySQL 5.7
