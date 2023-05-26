@@ -133,7 +133,7 @@ switch ($page) {
                 <td class='unfolding' data-section='description'><label for='checkbox$product_id'></label><input type='checkbox' id='checkbox$product_id'><p>$description</p></td>
                 <td data-section='year'>$year г.</td>
                 <td class='one-row' data-section='price'>$price р.</td>
-                <td class='image' data-section='img_url'><a href='assets/$img_url'><img src='assets/$img_url'></a></td>
+                <td class='image' data-section='img_url'><a href='assets/img/media/$img_url'><img src='assets/img/media/$img_url'></a></td>
                 <td data-section='date_added'>$date_added</td>
                 <td class='one-row' data-section='qnt'>$qnt шт.</td>
                 </tr>";

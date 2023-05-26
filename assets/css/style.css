@@ -95,6 +95,8 @@ select:last-child {
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  width: 80%;
+  max-width: 550px;
 }
 .error .enter {
   display: none;
@@ -109,6 +111,7 @@ select:last-child {
   border-color: #464646;
 }
 .hint {
+  box-sizing: border-box;
   background-color: white;
   box-shadow: 0 2px 4px 0 rgba(99, 79, 116, 0.14), 0 3px 4px 0 rgba(99, 79, 116, 0.12), 0 1px 5px 0 rgba(99, 79, 116, 0.2);
   border-radius: 5px;
@@ -118,8 +121,8 @@ select:last-child {
   color: #808080;
   visibility: hidden;
   opacity: 0;
-  width: 270px;
   min-height: 26px;
+  white-space: break-spaces;
 }
 .hide {
   width: 40px;
@@ -200,6 +203,11 @@ select:last-child {
   .hint {
     right: 0;
     width: auto;
+  }
+}
+@media (max-width: 480px) {
+  .container {
+    min-width: 320px;
   }
 }
 .standard-form div {
@@ -364,28 +372,18 @@ header .nav-trigger {
     gap: 0;
   }
   header .auth-buttons,
-  header .menus {
+  header .menu-button {
     pointer-events: none;
     opacity: 0;
     transition: opacity 0.3s;
   }
   header.unfolded .auth-buttons,
-  header.unfolded .menus {
+  header.unfolded .menu-button {
     pointer-events: all;
     opacity: 1;
   }
   header .container {
     flex-direction: column;
-  }
-  header .container::before {
-    content: "";
-    position: absolute;
-    top: 5px;
-    left: 15px;
-    width: 70px;
-    height: 70px;
-    background-size: cover;
-    background-image: url(../img/logo.png);
   }
   header .container > div {
     width: 200px;
@@ -406,8 +404,24 @@ header .nav-trigger {
   header .auth:hover {
     border-bottom: 0;
   }
+  header .menus .button-about {
+    transition: color 0.3s ease;
+    opacity: 1;
+    color: transparent;
+  }
+  header .button-about:hover {
+    background-color: transparent;
+  }
+  header.unfolded .button-about {
+    transition: color 0.3s ease;
+    color: gray;
+  }
+  header.unfolded .button-about:hover {
+    background-color: #e5e5e5;
+  }
   header .menus .button-about img {
-    display: none;
+    opacity: 1;
+    pointer-events: all;
   }
   header a {
     display: block;
@@ -481,7 +495,6 @@ Auth/register form styles
 .auth-box {
   animation: reveal 0.5s ease;
   border-radius: 5px;
-  width: 80%;
   min-width: 315px;
   max-width: 450px;
   box-shadow: 0 4px 5px 0 rgba(99, 79, 116, 0.14), 0 1px 10px 0 rgba(99, 79, 116, 0.12), 0 2px 4px 0 rgba(99, 79, 116, 0.2);
@@ -645,7 +658,9 @@ Catalog Styles
   border-radius: 5px;
   margin-left: 10px;
   margin-bottom: 10px;
-  width: 300px;
+  width: 30%;
+  min-width: 200px;
+  max-width: 300px;
   height: 300px;
   padding: 10px;
   box-shadow: 0 2px 4px 0 rgba(99, 79, 116, 0.14), 0 3px 4px 0 rgba(99, 79, 116, 0.12), 0 1px 5px 0 rgba(99, 79, 116, 0.2);
@@ -677,19 +692,23 @@ Catalog Styles
 .catalog .catalog-item .item-picture {
   display: flex;
   justify-content: center;
+  align-items: center;
   min-height: 170px;
 }
 .catalog .catalog-item .item-bottom {
   margin-top: 2px;
+  gap: 5px;
   display: flex;
+  flex-wrap: wrap;
   justify-content: space-between;
   align-items: flex-end;
 }
 .catalog .catalog-item img {
-  width: 200px;
+  width: 100%;
+  max-width: 250px;
   object-fit: contain;
 }
-@media (max-width: 944px) {
+@media (max-width: 956px) {
   .catalog .container {
     flex-direction: column;
   }
@@ -739,6 +758,8 @@ Catalog Styles
     height: auto;
     justify-content: space-between;
     margin-left: 0;
+    min-width: unset;
+    max-width: unset;
   }
   .catalog .catalog-item .item-content {
     position: relative;
@@ -811,6 +832,10 @@ Catalog Styles
   .catalog .catalog-item .item-picture {
     width: 120px;
   }
+  .catalog .hint {
+    max-height: 100px;
+    min-width: 200px;
+  }
 }
 /*******************
 Location page Styles
@@ -821,6 +846,7 @@ Location page Styles
 .location-page .map {
   box-shadow: 0 4px 5px 0 rgba(99, 79, 116, 0.14), 0 1px 10px 0 rgba(99, 79, 116, 0.12), 0 2px 4px 0 rgba(99, 79, 116, 0.2);
   border-radius: 5px;
+  font-size: 0;
 }
 .location-page .map img {
   width: 100%;
@@ -1100,6 +1126,7 @@ About page Styles
 }
 .about-page .catalog-item img {
   width: 100%;
+  pointer-events: none;
 }
 .about-page .catalog-item .item-right {
   max-width: 400px;
@@ -1487,7 +1514,7 @@ footer li p {
 }
 footer a:hover {
   transition: color 0.3s ease;
-  color: black;
+  color: #464646;
 }
 footer h6 {
   margin-top: 5px;
@@ -1514,11 +1541,8 @@ footer .copyright p {
   footer .navmenu-title {
     font-size: 16px;
   }
-  footer .navmenu-link {
-    padding: 10px;
-    padding-left: 0;
-  }
   footer .navmenu-link a {
+    display: block;
     padding: 10px;
     padding-left: 0;
   }

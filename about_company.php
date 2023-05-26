@@ -65,7 +65,7 @@ require_once 'assets/php/connection.php';
                                 <span>$price р.</span>
                             </div>
                             <div class='item-right'>
-                                <img src='../assets/$img_url'>
+                                <img src='../assets/img/media/$img_url'>
                             </div>
                         </div>";
                                 }

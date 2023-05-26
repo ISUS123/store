@@ -44,7 +44,7 @@ if ($result = mysqli_query($link, $query)) {
         echo  "<div class='catalog-item'>
                                     <div class='item-content'>
                                         <div class='item-name'><span>$name</span><span>$year г.</span></div>
-                                        <div class='item-picture'><a href='product?product_id=$product_id'><img src='../assets/$img_url' alt='$name'></a></div>
+                                        <div class='item-picture'><a href='product?product_id=$product_id'><img src='../assets/img/media/$img_url' alt='$name'></a></div>
                                         <div class='item-bottom'>
                                             <a href='product?product_id=$product_id' class='item-page'>Страница товара</a>
                                             <a class='to-cart' data-id='$product_id'>$price р.<div class='cart'></div></a>

@@ -25,7 +25,7 @@ require_once 'assets/php/connection.php';
                             $qnt = $row['qnt'];
                             echo "
                             <div class='product-card'>
-                                <img src='../assets/$img_url'>
+                                <img src='../assets/img/media/$img_url'>
                                     <div>
                                         <p>$name</p>
                                         <p>Год выпуска: $year</p>
